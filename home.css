@@ -1,18 +1,43 @@
 body {
     margin: 0 auto;
-    max-width: 30em;
+    max-width: 40em;
     display: flex;
-    flex-direction: column;  /* row default muss nicht angegeben werden*/
+    flex-direction: row;  /* row default muss nicht angegeben werden*/
+    flex-flow: row wrap;
 }
+
+header, footer, aside, article{
+
+    border-radius: 0px 0.5em 0.5em;
+    border: 1px solid;
+    padding: 10px;
+    margin: 10px;
+    flex: 1 100%;
+
+}
+
 header  {
     display: flex;
     flex-direction: column;
+
 
 }
 .control {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+aside {
+    flex: 2 0 0%;
+}
+
+article {
+    flex: 5 0 0%;
+}
+
+body > button {
+    flex: 1 0 0%;
 }
 
 
