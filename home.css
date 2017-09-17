@@ -1,45 +1,20 @@
 body {
     margin: 0 auto;
-    max-width: 60em;
+    max-width: 30em;
     display: flex;
-    flex-direction: row;  /* row default muss nicht angegeben werden*/
-    flex-flow: row wrap;
+    flex-direction: column;  /* row default muss nicht angegeben werden*/
 }
-
-header, nav, footer {
-    flex: 1 100%;
+header  {
     display: flex;
-    flex-flow: row wrap;
-}
+    flex-direction: column;
 
-header * {
-    flex: 1 1 0%;
 }
-
-header img {
-    flex: 0 0 400px;
-    margin-right: 50px;
-}
-
-header nav {
-    flex: 1 1 100%;
-}
-
-nav ul {
+.control {
     display: flex;
-    justify-content: space-around;
     flex-direction: row;
+    justify-content: space-between;
 }
 
-article {
-    flex: 3 1 0%;
-}
 
-aside {
-    flex: 1 1 0%;
-}
 
-#news {
-    height:120px;
-    align-self: flex-start;
-}
+

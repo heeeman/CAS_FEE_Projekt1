@@ -6,53 +6,45 @@
 
         <link rel="stylesheet" href="home.css">
 
-        <title>Title</title>
+        <title>Note pro</title>
     </head>
     <body>
     <header>
-        <h1>Seitentitel</h1>
-        <nav>
-            <ul>
-                <li><a href="#link_1.html">Startseite</a>
-                </li>
-                <li><a href="#link_2.html">Unterseite 1</a>
-                </li>
-                <li><a href="#link_3.html">Unterseite 2</a>
-                </li>
-                <li><a href="#link_4.html">Kontakt</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="control">
+
+            <Button>Create new Note</Button>
+
+            <div >
+                <select >
+                    <option value="bw">BlackWhite-Style</option>
+                    <option value="c">Color-Style</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="control">
+            <div>
+                <button>By finish Date</button>
+                <button>By created Date</button>
+                <button>By Importance</button>
+            </div>
+            <button>Show finished</button>
+        </div>
     </header>
-    <aside id="news">
-        <h2>Top-News</h2>
-        <p>Gestern gab's Freibier!</p>
-    </aside>
+
+
+
     <article>
-        <h2>Ein Layout mit Flexbox</h2>
-        <p>Flexbox ist eine sehr moderne und einfache Möglichkeit, responsive und flexible
-            Layouts zu erstellen. Dabei kommen Sie ohne feste Größenangaben aus und können
-            auf weitere CSS-Einstellungen wie position, float oder clear verzichten. </p>
-        <p>
-            Weiterhin kann nicht nur die Größendarstellung, sondern auch die Reihenfolge der
-            Elemente unabhängig vom HTML-Code durch CSS festgelegt werden. </p>
-        <h3>eine Bitte:</h3>
-        <p>Wenn Sie mit uns zufrieden sind, sagen Sie's weiter!
-            <br> Wenn nicht, sagen Sie's <a href="mailto:projekt@selfhtml.org ">uns</a>! </p>
+        <div>
+
+            <span>Termin</span> <span>Titel</span><img alt="Blitz">
+            <input type="checkbox">Finished</input><textarea>Beschreibung</textarea><button>Edit</button>
+        </div>
+
     </article>
-    <aside>
-        <h2>Links</h2>
-        <ul>
-            <li><a href="#link_1.html">Blog</a>
-            </li>
-            <li><a href="#link_2.html">Doku</a>
-            </li>
-            <li><a href="#link_3.html">Forum</a>
-            </li>
-        </ul>
-    </aside>
-    <footer> <a href="#kontakt.html">Kontakt</a>
-        <p>© 2014 by SELFHTML</p>
+
+    <footer>
+        <p>© 2017 by Heeeman</p>
     </footer>
     </body>
 </html>
