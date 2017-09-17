@@ -1,0 +1,45 @@
+body {
+    margin: 0 auto;
+    max-width: 60em;
+    display: flex;
+    flex-direction: row;  /* row default muss nicht angegeben werden*/
+    flex-flow: row wrap;
+}
+
+header, nav, footer {
+    flex: 1 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+header * {
+    flex: 1 1 0%;
+}
+
+header img {
+    flex: 0 0 400px;
+    margin-right: 50px;
+}
+
+header nav {
+    flex: 1 1 100%;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+article {
+    flex: 3 1 0%;
+}
+
+aside {
+    flex: 1 1 0%;
+}
+
+#news {
+    height:120px;
+    align-self: flex-start;
+}
