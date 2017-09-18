@@ -45,13 +45,17 @@ article {
  }
 
 .title {
-    flex: 1 0%;
+    flex: 2 0%;
     margin-left: 5px;
 
 }
 
-section > img {
-    flex: 3 0%;
+img {
+
+}
+
+.emty {
+    flex: 1 0%;
 }
 
 input {
