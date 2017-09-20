@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../index.css">
+        <title>Note pro</title>
+    </head>
+    <body>
+
+    <script src="../lib/handlebars-v4.0.10.js"></script>
+
+    <H1 id="Hello">Hello Handlebar</H1>
+
+    <div id="entryPoint">hier solls rein</div>
+
+    <div id="entryPoint2">hier solls rein</div>
+
+    <script id="entry-template" type="text/x-handlebars-template">
+
+
+        <div class="entry">
+            {{#each obi}}
+            <h1>{{title}}</h1>
+            <div class="body">
+                {{body}}
+            </div>
+            {{/each}}
+        </div>
+    </script>
+
+    <script>
+
+        var source   = document.getElementById("entry-template").innerHTML;
+        // var source   = $("#entry-template").html();
+        var template = Handlebars.compile(source);
+        var context = {obi: [{title: "My New Post", body: "This is my first post!"},
+                                {title: "Leck", body: "isch da cool!"}]};
+        var html    = template(context);
+
+
+
+        document.getElementById("entryPoint").innerHTML = html;
+
+
+
+    </script>
+
+
+
+
+
+
+    </body>
+</html>
