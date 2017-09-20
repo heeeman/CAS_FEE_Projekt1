@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="base.css">
         <link rel="stylesheet" href="index.css">
         <title>Note pro</title>
+        <script src="lib/handlebars-v4.0.10.js"></script>
     </head>
     <body>
 
@@ -32,23 +33,57 @@
             </div>
         </header>
 
-        <article class="rowContainer">
-            <section class="flexSize1 columnContainer">
-                <h3>Termin</h3>
-                <div>
-                    <input type="checkbox">   Finish</input>
-                </div>
-            </section>
-            <section class="flexSize3 columnContainer">
-                <div class="rowContainer">
-                    <h2 class="flexSize1">Titel</h2>
-                    <h2>🗲🗲🗲🗲🗲</h2>
-                </div>
-                <textarea disabled>Beschreibung\nbseras\nsafasfa</textarea>
-            </section>
-                <button class="flexSize1 editbutton">Edit</button>
+        <div id="entryPoint">
+        </div>
 
-        </article>
+        <script id="note-template" type="text/x-handlebars-template">
+                {{#each notes}}
+                <article class="rowContainer">
+                <section class="flexSize1 columnContainer">
+                    <h3>{{issueDate}}</h3>
+                    <div>
+                        <input {{finished}} type="checkbox">   Finish</input>
+                    </div>
+                </section>
+                <section class="flexSize3 columnContainer">
+                    <div class="rowContainer">
+                        <h2 class="flexSize1">{{title}}</h2>
+                        <h2>{{priority}}</h2>
+                    </div>
+                    <textarea disabled>{{description}}</textarea>
+                </section>
+                <button class="flexSize1 editbutton">Edit</button>
+                </article>
+                {{/each}}
+        </script>
+
+        <script>
+
+            var source   = document.getElementById("note-template").innerHTML;
+            var template = Handlebars.compile(source);
+            var context =
+                {notes: [
+                    {title: "My New Post",
+                        issueDate: "morgen",
+                        description: "This is my first post!",
+                        priority: "🗲🗲🗲🗲🗲",
+                    finished: "checked"},
+                    {title: "Rasen mähen",
+                        issueDate: "12.9.2017",
+                    description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
+                    "und \n endlich Nachbars Rosen ... hihi",
+                    priority: "🗲",
+                        finished: ""}]};
+            var html    = template(context);
+
+
+            console.log(html);
+            document.getElementById("entryPoint").innerHTML = html;
+
+
+
+        </script>
+
         <footer>
             <p>© 2017 by Heeeman</p>
         </footer>

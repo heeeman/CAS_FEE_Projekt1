@@ -37,6 +37,10 @@ input {
     margin-top: 1em;
 }
 
+#entryPoint {
+    flex: 1 100%;
+}
+
 
 
 
