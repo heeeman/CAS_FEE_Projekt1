@@ -13,7 +13,7 @@
         <header>
             <div class="control">
 
-                <Button onclick="window.open('edit.html')">Create new Note</Button>
+                <Button onclick="window.location.href = 'edit.html'">Create new Note</Button>
 
                 <div >
                     <select >
@@ -52,49 +52,12 @@
                     </div>
                     <textarea disabled>{{description}}</textarea>
                 </section>
-                <button onclick="window.open('edit.html?id={{id}}')" class="flexSize1 editbutton">Edit</button>
+                <button onclick="window.location.href = 'edit.html?id={{id}}'" class="flexSize1 editbutton">Edit</button>
                 </article>
                 {{/each}}
         </script>
+        <script src="index.js"></script>
 
-        <script>
-
-            var source   = document.getElementById("note-template").innerHTML;
-            var template = Handlebars.compile(source);
-            var context =
-                {notes: [
-                    {title: "My New Post",
-                        issueDate: "12.3.2017",
-                        dueDate:  "morgen",
-                        description: "This is my first post!",
-                        priority: "🗲🗲🗲🗲🗲",
-                    finished: "checked",
-                    id:1},
-                    {title: "Rasen mähen",
-                        issueDate: "12.01.2017",
-                        dueDate:  "12.9.2017",
-                        description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
-                        "und \n endlich die Rosen schneiden",
-                        priority: "🗲",
-                        finished: "",
-                        id:2},
-                    {title: "einkaufen",
-                        issueDate: "12.2.2017",
-                        dueDate:  "12.9.2017",
-                        description: "Für Fest einen Braten und etwas Feuerwasser." +
-                        "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-                        priority: "",
-                        finished: "",
-                        id:3}]};
-            var html    = template(context);
-
-
-            console.log(html);
-            document.getElementById("entryPoint").innerHTML = html;
-
-
-
-        </script>
 
         <footer>
             <p>© 2017 by Heeeman</p>
