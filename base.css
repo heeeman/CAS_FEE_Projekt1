@@ -1,0 +1,35 @@
+/* Base don't edit*/
+body {
+    margin: 0 auto;
+    max-width: 50em;
+    display: flex;
+    flex-direction: row;  /* row default muss nicht angegeben werden*/
+    flex-flow: row wrap;
+}
+
+header, footer, article{
+
+    border-radius: 0px 0.5em 0.5em;
+    border: 1px solid;
+    padding: 10px;
+    margin: 10px;
+    flex: 1 100%;
+
+}
+
+footer {
+    height: 2em;
+    padding-top: 0px;
+}
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.columnContainer {
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+}

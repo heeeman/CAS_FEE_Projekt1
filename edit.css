@@ -1,0 +1,50 @@
+.flexSize1 {
+    flex: 1 0 0%;
+}
+.flexSize2 {
+    flex: 2 0 0%;
+}
+.flexSize3 {
+    flex: 3 0 0%;
+}
+
+/* edit page*/
+* {
+    margin: 5px;
+}
+
+.arrowButton {
+    font-size: 1.5em;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background: transparent;
+    color: grey;
+}
+
+.arrowButton[checked] {
+    color: black;
+}
+
+label {
+    flex: 1 0 0%;
+}
+
+.mainIn {
+    flex: 3 0 0%;
+    margin-right: 10%;
+}
+
+textarea {
+    height: 10em;
+}
+
+input[type="date"] {
+    width: 5em;
+    flex: 1 0 0%;
+}
+
+article>button:last-of-type {
+    margin-left: 80%;
+
+}
