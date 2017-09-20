@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
         <title>Note pro</title>
     </head>
     <body>
+
         <header>
             <div class="control">
 
@@ -32,20 +33,23 @@
             </div>
         </header>
 
-<article>
-    <section>
-        <span class="termin">Termin</span>
-        <span class="title">Titel</span>
-        <img alt="Blitz"src="lightning.png" height="40" width="40">
-        <img alt="Blitz"src="lightning.png" height="40" width="40">
-        <span class="emty"></span>
-    </section>
-    <section>
-        <input type="checkbox"></input><span>Finished</span>
-        <textarea>Beschreibung</textarea>
-        <button>Edit</button>
-    </section>
-</article>
+        <article class="rowContainer">
+            <section class="flexSize1 columnContainer">
+                <h3>Termin</h3>
+                <div>
+                    <input type="checkbox">   Finish</input>
+                </div>
+            </section>
+            <section class="flexSize3 columnContainer">
+                <div class="rowContainer">
+                    <h2 class="flexSize1">Titel</h2>
+                    <h2>🗲🗲🗲🗲🗲</h2>
+                </div>
+                <textarea disabled>Beschreibung\nbseras\nsafasfa</textarea>
+            </section>
+                <button class="flexSize1 editbutton">Edit</button>
+
+        </article>
         <footer>
             <p>© 2017 by Heeeman</p>
         </footer>

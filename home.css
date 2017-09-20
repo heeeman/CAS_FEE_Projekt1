@@ -1,12 +1,50 @@
 body {
     margin: 0 auto;
-    max-width: 40em;
+    max-width: 50em;
     display: flex;
     flex-direction: row;  /* row default muss nicht angegeben werden*/
     flex-flow: row wrap;
 }
 
-header, footer, aside, article, input{
+button, select{
+    margin: 0.3em;
+    padding: 0.2em;
+}
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.columnContainer {
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+}
+
+.flexSize1 {
+    flex: 1 0 0%;
+}
+.flexSize2 {
+    flex: 2 0 0%;
+}
+.flexSize3 {
+    flex: 3 0 0%;
+}
+
+.editbutton {
+    margin: 2em 1em 0em;
+
+}
+
+.center {
+    align-content: center;
+    justify-content: center;
+}
+
+
+header, footer, article{
 
     border-radius: 0px 0.5em 0.5em;
     border: 1px solid;
@@ -16,11 +54,6 @@ header, footer, aside, article, input{
 
 }
 
-article>section{
-    display: flex;
-    flex-direction: row;
-    flex-flow: row wrap;
-}
 header  {
     display: flex;
     flex-direction: column;
@@ -31,53 +64,14 @@ header  {
     justify-content: space-between;
 }
 
-aside {
-    flex: 2 0 0%;
-}
-
-article {
-    flex: 5 0 0%;
-}
-
-.termin {
-    flex: 1 0%;
-    margin-left: 10px;
- }
-
-.title {
-    flex: 2 0%;
-    margin-left: 5px;
-
-}
-
-img {
-
-}
-
-.emty {
-    flex: 1 0%;
-}
-
 input {
-    flex: 0.5 0%;
-    justify-content: flex-start;
-    margin-right: -5px;
-    margin-left: -5px;
-    margin-top: 0px;
-    align-content: center;
+    margin-top: 1em;
 }
 
-textarea {
-    flex: 3  0%;
-    margin-left: 25px;
-    margin-right: 25px;
+footer {
+    height: 2em;
+    padding-top: 0px;
 }
-
-section > button {
-    flex: 0.5 0%;
-}
-
-
 
 
 
