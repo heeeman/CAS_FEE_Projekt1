@@ -47,11 +47,25 @@ footer {
 * {
     margin: 5px;
 }
+
+.arrowButton {
+    font-size: 1.5em;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background: transparent;
+    color: grey;
+}
+
+.arrowButton[checked] {
+    color: black;
+}
+
 label {
     flex: 1 0 0%;
 }
 
-div>input, div>textarea, div>button {
+.mainIn {
     flex: 3 0 0%;
     margin-right: 10%;
 }
