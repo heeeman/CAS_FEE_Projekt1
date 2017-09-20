@@ -1,3 +1,4 @@
+/* Base don't edit*/
 body {
     margin: 0 auto;
     max-width: 50em;
@@ -32,46 +33,3 @@ footer {
     flex-direction: column;
     flex-flow: column wrap;
 }
-
-button, select{
-    margin: 0.3em;
-    padding: 0.2em;
-}
-
-.flexSize1 {
-    flex: 1 0 0%;
-}
-.flexSize2 {
-    flex: 2 0 0%;
-}
-.flexSize3 {
-    flex: 3 0 0%;
-}
-
-.editbutton {
-    margin: 2em 1em 0em;
-
-}
-
-.center {
-    align-content: center;
-    justify-content: center;
-}
-
-header  {
-    display: flex;
-    flex-direction: column;
-}
-.control {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-input {
-    margin-top: 1em;
-}
-
-
-
-
