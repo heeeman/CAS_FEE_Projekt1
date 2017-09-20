@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="base.css">
+        <link id="baseStyleSheet" rel="stylesheet" href="base.css">
         <link rel="stylesheet" href="index.css">
         <title>Note pro</title>
         <script src="lib/handlebars-v4.0.10.js"></script>
@@ -16,18 +16,18 @@
                 <Button onclick="window.location.href = 'edit.html'">Create new Note</Button>
 
                 <div >
-                    <select >
-                        <option value="bw">BlackWhite-Style</option>
-                        <option value="c">Color-Style</option>
+                    <select oninput="changeStyle(value)" >
+                        <option value="base">Default-Style</option>
+                        <option value="baseFrame">Frame-Style</option>
                     </select>
                 </div>
 
             </div>
             <div class="control">
                 <section>
-                    <button>By finish Date</button>
-                    <button>By created Date</button>
-                    <button>By Importance</button>
+                    <button onclick="sortNotesOnFinishDate()">By finish Date</button>
+                    <button onclick="sortNotesOnIssueDate()">By created Date</button>
+                    <button onclick="sortNotesOnPriority()">By Importance</button>
                 </section>
                 <button>Show finished</button>
             </div>
@@ -50,7 +50,7 @@
                         <h2 class="flexSize1">{{title}}</h2>
                         <h2>{{priority}}</h2>
                     </div>
-                    <textarea disabled>{{description}}</textarea>
+                    <textarea readonly>{{description}}</textarea>
                 </section>
                 <button onclick="window.location.href = 'edit.html?id={{id}}'" class="flexSize1 editbutton">Edit</button>
                 </article>
