@@ -13,7 +13,7 @@ function setContent(htmlTemplate, context) {
 
 function loadNoteById(id) {
     if (!id) return {};
-    let a= loadNotes().notes.filter(note => note.id == id);
+    let a= loadNotes().filter(note => note.id == id);
     return a.length > 0 ? a[0] : {};
 }
 
@@ -24,20 +24,20 @@ function loadNoteById(id) {
  */
 function loadNotes() {
   console.log('tue so als ob ich was vom Server lade');
-    return     {notes: [
+    return [
         {title: "My New Post",
             issueDate: "2017-03-17",
             dueDate:  "2017-10-17",
             description: "This is my first post!",
-            priority: "🗲🗲🗲🗲🗲",
+            priority: "",
             finished: "checked",
             id:1},
         {title: "Rasen mähen",
             issueDate: "2017-01-12",
-            dueDate:  "2017-09-12",
+            dueDate:  "2018-09-12",
             description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
             "und \n endlich die Rosen schneiden",
-            priority: "🗲",
+            priority: "🗲🗲🗲🗲🗲",
             finished: "",
             id:2},
         {title: "einkaufen",
@@ -45,9 +45,9 @@ function loadNotes() {
             dueDate:  "2017-09-12",
             description: "Für Fest einen Braten und etwas Feuerwasser." +
             "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-            priority: "",
+            priority: "🗲🗲🗲",
             finished: "",
-            id:3}]};
+            id:3}];
 }
 
 function changeStyle(filename) {
@@ -55,31 +55,20 @@ function changeStyle(filename) {
 }
 
 function sortNotesOnFinishDate() {
-    console.log('sort Notes on finish date -> give me soul');
-    setContent(MAIN_PAGE, {notes: [
-
-        {title: "Rasen mähen",
-            issueDate: "12.01.2017",
-            dueDate:  "12.9.2017",
-            description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
-            "und \n endlich die Rosen schneiden",
-            priority: "🗲",
-            finished: "",
-            id:2},
-        {title: "einkaufen",
-            issueDate: "12.2.2017",
-            dueDate:  "12.9.2017",
-            description: "Für Fest einen Braten und etwas Feuerwasser." +
-            "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-            priority: "",
-            finished: "",
-            id:3}]})
+    let newOrder = loadNotes().sort((a, b) => getInt(b.dueDate) - getInt(a.dueDate));
+    setContent(MAIN_PAGE, newOrder);
 }
 
 function sortNotesOnIssueDate() {
-    console.log('sort Notes on issue date -> give me soul');
+    let newOrder = loadNotes().sort((a, b) => getInt(b.issueDate) - getInt(a.issueDate));
+    setContent(MAIN_PAGE, newOrder);
 }
 
 function sortNotesOnPriority() {
-    console.log('sort Notes on priority -> give me soul');
+    let newOrder = loadNotes().sort((a, b) => b.priority.length - a.priority.length);
+    setContent(MAIN_PAGE, newOrder);
+}
+
+function getInt(s) {
+    return parseInt(s.replace('-',''));
 }

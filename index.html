@@ -36,7 +36,7 @@
                     <button>Show finished</button>
                 </div>
             </header>
-            {{#each notes}}
+            {{#each this}} <!-- speziale damit ich direkt ein array übergeben kann und dieses nicht in ein Obj packen muss-->
             <article class="rowContainer">
             <section class="flexSize1 columnContainer space">
                 <h3>{{dueDate}}</h3>
