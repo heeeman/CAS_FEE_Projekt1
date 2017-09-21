@@ -1,5 +1,7 @@
+const MAIN_PAGE = "main-template";
+const EDIT_PAGE = "edit-template";
 
-setContent("note-template", loadNotes())
+setContent(MAIN_PAGE, loadNotes());
 
 function setContent(htmlTemplate, context) {
 
@@ -43,7 +45,7 @@ function changeStyle(filename) {
 
 function sortNotesOnFinishDate() {
     console.log('sort Notes on finish date -> give me soul');
-    setContent("note-template", {notes: [
+    setContent(MAIN_PAGE, {notes: [
 
         {title: "Rasen mähen",
             issueDate: "12.01.2017",

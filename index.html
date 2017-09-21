@@ -10,52 +10,86 @@
     </head>
     <body>
 
-        <header>
-            <div class="control">
-
-                <Button onclick="window.location.href = 'edit.html'">Create new Note</Button>
-
-                <div >
-                    <select oninput="changeStyle(value)" >
-                        <option value="base">Default-Style</option>
-                        <option value="baseFrame">Frame-Style</option>
-                    </select>
-                </div>
-
-            </div>
-            <div class="control">
-                <section>
-                    <button onclick="sortNotesOnFinishDate()">By finish Date</button>
-                    <button onclick="sortNotesOnIssueDate()">By created Date</button>
-                    <button onclick="sortNotesOnPriority()">By Importance</button>
-                </section>
-                <button>Show finished</button>
-            </div>
-        </header>
-
         <div id="entryPoint">
         </div>
 
-        <script id="note-template" type="text/x-handlebars-template">
-                {{#each notes}}
-                <article class="rowContainer">
-                <section class="flexSize1 columnContainer">
-                    <h3>{{dueDate}}</h3>
-                    <div>
-                        <input disabled {{finished}} type="checkbox">   Finish</input>
+        <script id="main-template" type="text/x-handlebars-template">
+            <header>
+                <div class="control">
+
+                    <Button onclick="setContent(EDIT_PAGE, {});">Create new Note</Button>
+
+                    <div >
+                        <select oninput="changeStyle(value)" >
+                            <option value="base">Default-Style</option>
+                            <option value="baseFrame">Frame-Style</option>
+                        </select>
                     </div>
-                </section>
-                <section class="flexSize3 columnContainer">
-                    <div class="rowContainer">
-                        <h2 class="flexSize1">{{title}}</h2>
-                        <h2>{{priority}}</h2>
-                    </div>
-                    <textarea readonly>{{description}}</textarea>
-                </section>
-                <button onclick="window.location.href = 'edit.html?id={{id}}'" class="flexSize1 editbutton">Edit</button>
-                </article>
-                {{/each}}
+
+                </div>
+                <div class="control">
+                    <section>
+                        <button onclick="sortNotesOnFinishDate()">By finish Date</button>
+                        <button onclick="sortNotesOnIssueDate()">By created Date</button>
+                        <button onclick="sortNotesOnPriority()">By Importance</button>
+                    </section>
+                    <button>Show finished</button>
+                </div>
+            </header>
+            {{#each notes}}
+            <article class="rowContainer">
+            <section class="flexSize1 columnContainer">
+                <h3>{{dueDate}}</h3>
+                <div>
+                    <input disabled {{finished}} type="checkbox">   Finish</input>
+                </div>
+            </section>
+            <section class="flexSize3 columnContainer">
+                <div class="rowContainer">
+                    <h2 class="flexSize1">{{title}}</h2>
+                    <h2>{{priority}}</h2>
+                </div>
+                <textarea readonly>{{description}}</textarea>
+            </section>
+            <button onclick="window.location.href = 'edit.html?id={{id}}'" class="flexSize1 editbutton">Edit</button>
+            </article>
+            {{/each}}
         </script>
+
+        <script id="edit-template" type="text/x-handlebars-template">
+            <article class="columnContainer">
+                <div class="rowContainer">
+                    <label class="">Titel</label>
+                    <input class="mainIn" type="text">
+                </div>
+                <div class="rowContainer">
+                    <label>Beschreibung</label>
+                    <textarea class="mainIn height10" placeholder="Was will ich machen..."></textarea>
+                </div>
+                <div class="rowContainer">
+                    <label>Wichtigkeit</label>
+
+                    <div class="mainIn">
+
+                        <button checked class="arrowButton">🗲</button>
+                        <button checked class="arrowButton">🗲</button>
+                        <button class="arrowButton">🗲</button>
+                        <button class="arrowButton">🗲</button>
+                        <button class="arrowButton">🗲</button>
+
+                    </div>
+                </div>
+                <div class="rowContainer">
+                    <label>Erledigt bis:</label>
+                    <input class="mainIn" type="date">
+                    <div class="flexSize2"></div>
+                </div>
+                <button>Speichern</button>
+                <button class="cancelButton" onclick="setContent(MAIN_PAGE, loadNotes())">Cancel</button>
+
+            </article>
+        </script>
+
         <script src="index.js"></script>
 
 
