@@ -51,7 +51,7 @@
                 </div>
                 <textarea readonly>{{description}}</textarea>
             </section>
-            <button onclick="window.location.href = 'edit.html?id={{id}}'" class="flexSize1 editbutton">Edit</button>
+            <button onclick="setContent(EDIT_PAGE, loadNoteById({{id}}));" class="flexSize1 editbutton">Edit</button>
             </article>
             {{/each}}
         </script>
@@ -60,11 +60,11 @@
             <article class="columnContainer">
                 <div class="rowContainer">
                     <label class="">Titel</label>
-                    <input class="mainIn" type="text">
+                    <input class="mainIn" type="text" value="{{title}}">
                 </div>
                 <div class="rowContainer">
                     <label>Beschreibung</label>
-                    <textarea class="mainIn height10" placeholder="Was will ich machen..."></textarea>
+                    <textarea class="mainIn height10" placeholder="Was will ich machen...">{{description}}</textarea>
                 </div>
                 <div class="rowContainer">
                     <label>Wichtigkeit</label>
@@ -81,12 +81,11 @@
                 </div>
                 <div class="rowContainer">
                     <label>Erledigt bis:</label>
-                    <input class="mainIn" type="date">
+                    <input class="mainIn" type="date" value="{{dueDate}}">
                     <div class="flexSize2"></div>
                 </div>
                 <button>Speichern</button>
                 <button class="cancelButton" onclick="setContent(MAIN_PAGE, loadNotes())">Cancel</button>
-
             </article>
         </script>
 
