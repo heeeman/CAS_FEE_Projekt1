@@ -1,99 +1,99 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link id="baseStyleSheet" rel="stylesheet" href="base.css">
-        <link rel="stylesheet" href="index.css">
-        <title>Note pro</title>
-        <script src="lib/handlebars-v4.0.10.js"></script>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="baseStyleSheet" rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="index.css">
+    <title>Note pro</title>
+    <script src="lib/handlebars-v4.0.10.js"></script>
+</head>
+<body>
 
-        <div id="entryPoint">
+<div id="entryPoint">
+</div>
+
+<script id="main-template" type="text/x-handlebars-template">
+    <header>
+        <div class="control">
+
+            <Button onclick="setContent(EDIT_PAGE, {});">Create new Note</Button>
+
+            <div >
+                <select oninput="changeStyle(value)" >
+                    <option value="base">Default-Style</option>
+                    <option value="baseFrame">Frame-Style</option>
+                </select>
+            </div>
+
         </div>
+        <div class="control">
+            <div>
+                <button onclick="sortNotesOnFinishDate()">By finish Date</button>
+                <button onclick="sortNotesOnIssueDate()">By created Date</button>
+                <button onclick="sortNotesOnPriority()">By Importance</button>
+            </div>
+            <button>Show finished</button>
+        </div>
+    </header>
+    {{#each this}} <!-- speziale damit ich direkt ein array übergeben kann und dieses nicht in ein Obj packen muss-->
+    <article class="rowContainer">
+        <section class="flexSize1 columnContainer space">
+            <h3>{{#dateConverter dueDate}}{{/dateConverter}}</h3>
+            <div>
+                <input disabled {{finished}} type="checkbox">   Finish</input>
+            </div>
+        </section>
+        <section class="flexSize3 columnContainer">
+            <div class="rowContainer">
+                <h2 class="flexSize1">{{title}}</h2>
+                <h2>{{priority}}</h2>
+            </div>
+            <textarea readonly>{{description}}</textarea>
+        </section>
+        <button onclick="setContent(EDIT_PAGE, loadNoteById({{id}}));" class="flexSize1 editbutton">Edit</button>
+    </article>
+    {{/each}}
+</script>
 
-        <script id="main-template" type="text/x-handlebars-template">
-            <header>
-                <div class="control">
+<script id="edit-template" type="text/x-handlebars-template">
+    <article class="columnContainer">
+        <div class="rowContainer">
+            <label class="">Titel</label>
+            <input class="mainIn" type="text" value="{{title}}">
+        </div>
+        <div class="rowContainer">
+            <label>Beschreibung</label>
+            <textarea class="mainIn height10" placeholder="Was will ich machen...">{{description}}</textarea>
+        </div>
+        <div class="rowContainer">
+            <label>Wichtigkeit</label>
 
-                    <Button onclick="setContent(EDIT_PAGE, {});">Create new Note</Button>
+            <div class="mainIn">
 
-                    <div >
-                        <select oninput="changeStyle(value)" >
-                            <option value="base">Default-Style</option>
-                            <option value="baseFrame">Frame-Style</option>
-                        </select>
-                    </div>
+                <button checked class="arrowButton">🗲</button>
+                <button checked class="arrowButton">🗲</button>
+                <button class="arrowButton">🗲</button>
+                <button class="arrowButton">🗲</button>
+                <button class="arrowButton">🗲</button>
 
-                </div>
-                <div class="control">
-                    <div>
-                        <button onclick="sortNotesOnFinishDate()">By finish Date</button>
-                        <button onclick="sortNotesOnIssueDate()">By created Date</button>
-                        <button onclick="sortNotesOnPriority()">By Importance</button>
-                    </div>
-                    <button>Show finished</button>
-                </div>
-            </header>
-            {{#each this}} <!-- speziale damit ich direkt ein array übergeben kann und dieses nicht in ein Obj packen muss-->
-            <article class="rowContainer">
-            <section class="flexSize1 columnContainer space">
-                <h3>{{dueDate}}</h3>
-                <div>
-                    <input disabled {{finished}} type="checkbox">   Finish</input>
-                </div>
-            </section>
-            <section class="flexSize3 columnContainer">
-                <div class="rowContainer">
-                    <h2 class="flexSize1">{{title}}</h2>
-                    <h2>{{priority}}</h2>
-                </div>
-                <textarea readonly>{{description}}</textarea>
-            </section>
-            <button onclick="setContent(EDIT_PAGE, loadNoteById({{id}}));" class="flexSize1 editbutton">Edit</button>
-            </article>
-            {{/each}}
-        </script>
+            </div>
+        </div>
+        <div class="rowContainer">
+            <label>Erledigt bis:</label>
+            <input class="mainIn" type="date" value="{{dueDate}}">
+            <div class="flexSize2"></div>
+        </div>
+        <button>Speichern</button>
+        <button class="cancelButton" onclick="setContent(MAIN_PAGE, loadNotes())">Cancel</button>
+    </article>
+</script>
 
-        <script id="edit-template" type="text/x-handlebars-template">
-            <article class="columnContainer">
-                <div class="rowContainer">
-                    <label class="">Titel</label>
-                    <input class="mainIn" type="text" value="{{title}}">
-                </div>
-                <div class="rowContainer">
-                    <label>Beschreibung</label>
-                    <textarea class="mainIn height10" placeholder="Was will ich machen...">{{description}}</textarea>
-                </div>
-                <div class="rowContainer">
-                    <label>Wichtigkeit</label>
-
-                    <div class="mainIn">
-
-                        <button checked class="arrowButton">🗲</button>
-                        <button checked class="arrowButton">🗲</button>
-                        <button class="arrowButton">🗲</button>
-                        <button class="arrowButton">🗲</button>
-                        <button class="arrowButton">🗲</button>
-
-                    </div>
-                </div>
-                <div class="rowContainer">
-                    <label>Erledigt bis:</label>
-                    <input class="mainIn" type="date" value="{{dueDate}}">
-                    <div class="flexSize2"></div>
-                </div>
-                <button>Speichern</button>
-                <button class="cancelButton" onclick="setContent(MAIN_PAGE, loadNotes())">Cancel</button>
-            </article>
-        </script>
-
-        <script src="index.js"></script>
+<script src="index.js"></script>
 
 
-        <footer>
-            <p>© 2017 by Heeeman</p>
-        </footer>
-    </body>
+<footer>
+    <p>© 2017 by Heeeman</p>
+</footer>
+</body>
 </html>

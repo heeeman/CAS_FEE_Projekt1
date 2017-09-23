@@ -1,10 +1,27 @@
 const MAIN_PAGE = "main-template";
 const EDIT_PAGE = "edit-template";
+const LOCALSTORAGE_ID = "CAS_FEE_V1";
 
-setContent(MAIN_PAGE, loadNotes());
+initApplication();
+
+//testcode
+console.log("ACHTUNG : TESTCODE - SCHREIBT FIXE NOTES IN DEN LOCALSTORAGE");
+window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(getTestData()));
+// ende testcode
+
+
+function initApplication() {
+
+    // registriert die notwendigen Helper im Handlebar
+    Handlebars.registerHelper('dateConverter', function(dateString){
+        return new Date(dateString).toLocaleDateString();
+    });
+
+    // laden der Daten und rendern des main page
+    setContent(MAIN_PAGE, loadNotes());
+}
 
 function setContent(htmlTemplate, context) {
-    console.log('context ', context);
     let source   = document.getElementById(htmlTemplate).innerHTML;
     let template = Handlebars.compile(source);
     let html    = template(context);
@@ -23,31 +40,10 @@ function loadNoteById(id) {
  * @returns {{notes: [null,null,null]}}
  */
 function loadNotes() {
-  console.log('tue so als ob ich was vom Server lade');
-    return [
-        {title: "My New Post",
-            issueDate: "2017-03-17",
-            dueDate:  "2017-10-17",
-            description: "This is my first post!",
-            priority: "",
-            finished: "checked",
-            id:1},
-        {title: "Rasen mähen",
-            issueDate: "2017-01-12",
-            dueDate:  "2018-09-12",
-            description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
-            "und \n endlich die Rosen schneiden",
-            priority: "🗲🗲🗲🗲🗲",
-            finished: "",
-            id:2},
-        {title: "einkaufen",
-            issueDate: "2017-02-12",
-            dueDate:  "2017-09-12",
-            description: "Für Fest einen Braten und etwas Feuerwasser." +
-            "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-            priority: "🗲🗲🗲",
-            finished: "",
-            id:3}];
+
+    var noteString = window.localStorage.getItem(LOCALSTORAGE_ID);
+    if (!noteString || noteString == 'undefined') return [];
+    return JSON.parse(noteString).notes;
 }
 
 function changeStyle(filename) {
@@ -71,4 +67,41 @@ function sortNotesOnPriority() {
 
 function getInt(s) {
     return parseInt(s.replace('-',''));
+}
+
+// ab hier testcode
+
+function getTestData() {
+    return {
+        notes: [
+            {
+                title: "My New Post",
+                issueDate: "2017-03-17",
+                dueDate: "2017-10-17",
+                description: "This is my first post!",
+                priority: "",
+                finished: "checked",
+                id: 1
+            },
+            {
+                title: "Rasen mähen",
+                issueDate: "2017-01-12",
+                dueDate: "2018-09-12",
+                description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
+                "und \n endlich die Rosen schneiden",
+                priority: "🗲🗲🗲🗲🗲",
+                finished: "",
+                id: 2
+            },
+            {
+                title: "einkaufen",
+                issueDate: "2017-02-12",
+                dueDate: "2017-09-12",
+                description: "Für Fest einen Braten und etwas Feuerwasser." +
+                "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
+                priority: "🗲🗲🗲",
+                finished: "",
+                id: 3
+            }]
+    };
 }
