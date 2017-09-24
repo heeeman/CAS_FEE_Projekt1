@@ -65,6 +65,14 @@ function sortNotesOnPriority() {
     setContent(MAIN_PAGE, newOrder);
 }
 
+function save() {
+    console.log("TODO save()");
+    var form = document.getElementsByTagName("form")[0];
+    console.log("validity form: ", form.checkValidity());
+    console.log("validity form: ", form.reportValidity());
+}
+
+
 function getInt(s) {
     return parseInt(s.replace('-',''));
 }

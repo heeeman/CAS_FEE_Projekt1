@@ -57,36 +57,39 @@
 </script>
 
 <script id="edit-template" type="text/x-handlebars-template">
-    <article class="columnContainer">
-        <div class="rowContainer">
-            <label class="">Titel</label>
-            <input class="mainIn" type="text" value="{{title}}">
-        </div>
-        <div class="rowContainer">
-            <label>Beschreibung</label>
-            <textarea class="mainIn height10" placeholder="Was will ich machen...">{{description}}</textarea>
-        </div>
-        <div class="rowContainer">
-            <label>Wichtigkeit</label>
-
-            <div class="mainIn">
-
-                <button checked class="lightningButton">🗲</button>
-                <button checked class="lightningButton">🗲</button>
-                <button class="lightningButton">🗲</button>
-                <button class="lightningButton">🗲</button>
-                <button class="lightningButton">🗲</button>
-
+    <form>
+        <article class="columnContainer">
+            <div class="rowContainer">
+                <label class="">Titel</label>
+                <input class="mainIn" type="text" value="{{title}}" maxlength="70" required>
             </div>
-        </div>
-        <div class="rowContainer">
-            <label>Erledigt bis:</label>
-            <input class="mainIn" type="date" value="{{dueDate}}">
-            <div class="flexSize2"></div>
-        </div>
-        <button>Speichern</button>
-        <button class="cancelButton" onclick="setContent(MAIN_PAGE, loadNotes())">Cancel</button>
-    </article>
+            <div class="rowContainer">
+                <label>Beschreibung</label>
+                <textarea class="mainIn height10" maxlength="2000" placeholder="Was will ich machen...">{{description}}</textarea>
+            </div>
+            <div class="rowContainer">
+                <label>Wichtigkeit</label>
+
+                <div class="mainIn">
+
+                    <button checked class="lightningButton">🗲</button>
+                    <button checked class="lightningButton">🗲</button>
+                    <button class="lightningButton">🗲</button>
+                    <button class="lightningButton">🗲</button>
+                    <button class="lightningButton">🗲</button>
+
+                </div>
+            </div>
+            <div class="rowContainer">
+                <label>Erledigt bis:</label>
+                <input class="mainIn" onchange="console.log('finish: ' , value)"type="date" value="{{dueDate}}" maxlength="10" required>
+                <div class="flexSize2"></div>
+            </div>
+            <button onclick="save()" type="button">Speichern</button>
+            <button class="cancelButton" onclick="setContent(MAIN_PAGE, loadNotes())">Cancel</button>
+        </article>
+    </form>
+
 </script>
 
 <script src="index.js"></script>
