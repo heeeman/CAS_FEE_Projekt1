@@ -46,7 +46,7 @@ header  {
 }
 
 /* edit css*/
-.arrowButton {
+.lightningButton {
     font-size: 1.5em;
     margin: 0px;
     padding: 0px;
@@ -55,7 +55,7 @@ header  {
     color: grey;
 }
 
-.arrowButton[checked] {
+.lightningButton[checked] {
     color: black;
 }
 

@@ -8,9 +8,6 @@ body {
 }
 
 header, footer, article{
-
-    border-radius: 0px 0.5em 0.5em;
-    border: 1px solid;
     padding: 10px;
     margin: 10px;
     flex: 1 100%;
@@ -18,8 +15,7 @@ header, footer, article{
 }
 
 footer {
-    height: 2em;
-    padding-top: 0px;
+    display: none;
 }
 
 .rowContainer {
