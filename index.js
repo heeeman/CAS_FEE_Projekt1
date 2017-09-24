@@ -2,15 +2,14 @@ const MAIN_PAGE = "main-template";
 const EDIT_PAGE = "edit-template";
 const LOCALSTORAGE_ID = "CAS_FEE_V1";
 
-initApplication();
-
-//testcode
-console.log("ACHTUNG : TESTCODE - SCHREIBT FIXE NOTES IN DEN LOCALSTORAGE");
-window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(getTestData()));
-// ende testcode
-
+window.onload(initApplication());
 
 function initApplication() {
+
+    //testcode
+    console.log("ACHTUNG : TESTCODE - SCHREIBT FIXE NOTES IN DEN LOCALSTORAGE");
+    window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(getTestData()));
+    // ende testcode
 
     // registriert die notwendigen Helper im Handlebar
     Handlebars.registerHelper('dateConverter', function(dateString){
