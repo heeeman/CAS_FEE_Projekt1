@@ -2,7 +2,7 @@ const MAIN_PAGE = "main-template";
 const EDIT_PAGE = "edit-template";
 const LOCALSTORAGE_ID = "CAS_FEE_V1";
 
-window.onload(initApplication());
+initApplication();
 
 function initApplication() {
 
