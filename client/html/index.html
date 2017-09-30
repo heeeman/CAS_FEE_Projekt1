@@ -16,23 +16,16 @@
 <script id="main-template" type="text/x-handlebars-template">
     <header>
         <div class="control">
-
             <Button onclick="setContent(EDIT_PAGE, {});">Create new Note</Button>
-
-            <div >
-                <select oninput="changeStyle(value)" >
-                    <option value="base">Default-Style</option>
-                    <option value="baseFrame">Frame-Style</option>
-                </select>
-            </div>
-
+            <select oninput="changeStyle(value)" >
+                <option value="base">Default-Style</option>
+                <option value="baseFrame">Frame-Style</option>
+            </select>
         </div>
         <div class="control">
-            <div>
-                <button onclick="sortNotesOnFinishDate()">By finish Date</button>
-                <button onclick="sortNotesOnIssueDate()">By created Date</button>
-                <button onclick="sortNotesOnPriority()">By Importance</button>
-            </div>
+            <button onclick="sortNotesOnFinishDate()">By finish Date</button>
+            <button onclick="sortNotesOnIssueDate()">By created Date</button>
+            <button onclick="sortNotesOnPriority()">By Importance</button>
             <button>Show finished</button>
         </div>
     </header>
@@ -69,13 +62,13 @@
             </div>
             <div class="rowContainer">
                 <label>Wichtigkeit</label>
-                <div class="mainIn">
+                <span class="mainIn">
                     <button checked class="lightningButton">🗲</button>
                     <button checked class="lightningButton">🗲</button>
                     <button class="lightningButton">🗲</button>
                     <button class="lightningButton">🗲</button>
                     <button class="lightningButton">🗲</button>
-                </div>
+                </span>
             </div>
             <div class="rowContainer">
                 <label>Erledigt bis:</label>

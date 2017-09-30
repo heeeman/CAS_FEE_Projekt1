@@ -46,7 +46,7 @@ function loadNotes() {
 }
 
 function changeStyle(filename) {
-    document.getElementById('baseStyleSheet').href = filename + '.css';
+    document.getElementById('baseStyleSheet').href = '../css/' + filename + '.css';
 }
 
 function sortNotesOnFinishDate() {
