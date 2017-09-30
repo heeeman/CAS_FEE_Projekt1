@@ -2,11 +2,24 @@
     margin: 0.3em;
 }
 
-div {
-    margin: 0;
+.rowContainer {
+    display: flex;
+    flex-direction: row;
 }
 
-button, select{
+.columnContainer {
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+}
+
+header {
+    margin-right: 0.6em;
+    padding-right: 0.9em;
+}
+
+button, select, span{
     padding: 0.2em;
 }
 
@@ -30,14 +43,7 @@ button, select{
     justify-content: space-around;
 }
 
-header  {
-    display: flex;
-    flex-direction: column;
-}
-
-.control {
-    display: flex;
-    flex-direction: row;
+.between {
     justify-content: space-between;
 }
 
@@ -45,26 +51,21 @@ header  {
     flex: 1 100%;
 }
 
-/* edit css*/
-.lightningButton {
+.bolt {
     font-size: 1.5em;
     margin: 0px;
     padding: 0px;
     border: 0px;
     background: transparent;
     color: grey;
+    width: 5%;
 }
 
-.lightningButton[checked] {
+.bolt[checked] {
     color: black;
 }
 
-label {
-    flex: 1 0 0%;
-}
-
-.mainIn {
-    flex: 3 0 0%;
+.editIn {
     margin-right: 10%;
 }
 
@@ -74,12 +75,10 @@ label {
 
 input[type="date"] {
     width: 5em;
-    flex: 1 0 0%;
 }
 
 .cancelButton {
     margin-left: 80%;
-
 }
 
 

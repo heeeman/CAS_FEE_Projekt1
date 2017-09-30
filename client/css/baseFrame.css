@@ -1,9 +1,6 @@
-/* Base don't edit*/
 body {
     margin: 0 auto;
     max-width: 50em;
-    display: flex;
-    flex-direction: row;  /* row default muss nicht angegeben werden*/
     flex-flow: row wrap;
 }
 
@@ -18,21 +15,10 @@ header, footer, article{
 
 footer {
     height: 2em;
-    margin-top: 0em;
+    margin: 0em 0.9em 0.3em;
 }
 
 footer, Header, select {
     background-color: lemonchiffon;
 }
 
-.rowContainer {
-    display: flex;
-    flex-direction: row;
-}
-
-.columnContainer {
-    flex: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-flow: column wrap;
-}
