@@ -1,9 +1,5 @@
-/* Base don't edit*/
 body {
     margin: 0 auto;
-
-    display: flex;
-    flex-direction: row;  /* row default muss nicht angegeben werden*/
     flex-flow: row wrap;
 }
 
@@ -11,21 +7,9 @@ header, footer, article{
     padding: 10px;
     margin: 10px;
     flex: 1 100%;
-
 }
 
 footer {
     display: none;
 }
 
-.rowContainer {
-    display: flex;
-    flex-direction: row;
-}
-
-.columnContainer {
-    flex: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-flow: column wrap;
-}
