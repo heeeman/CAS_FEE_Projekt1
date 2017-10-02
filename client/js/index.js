@@ -7,8 +7,8 @@ initApplication();
 function initApplication() {
 
     //testcode
-    console.log("ACHTUNG : TESTCODE - SCHREIBT FIXE NOTES IN DEN LOCALSTORAGE");
-    window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(getTestData()));
+    // console.log("ACHTUNG : TESTCODE - SCHREIBT FIXE NOTES IN DEN LOCALSTORAGE");
+    // persistNotes(getTestData().notes);
     // ende testcode
 
     // registriert die notwendigen Helper im Handlebar
@@ -64,13 +64,65 @@ function sortNotesOnPriority() {
     setContent(MAIN_PAGE, newOrder);
 }
 
-function save() {
+function save(event) {
     console.log("TODO save()");
+    console.log("submit event: ", event);
     var form = document.getElementsByTagName("form")[0];
+
+    let title = form.elements['title'].value;
+    let description = form.elements['description'].value;
+    let bolt = '🗲'; // TODO
+    let endtime = form.elements['endtime'].value;
+    let noteId = form.elements['noteid'].value;
+
+
+
+    let note =             {
+        title: title,
+        issueDate: "2017-03-17",
+        dueDate: endtime,
+        description: description,
+        priority: bolt,
+        finished: "",
+        id: noteId
+    }
+
+    if (noteId) {
+        updateNote(note);
+    }else {
+        addNewNote(note);
+    }
+
     console.log("validity form: ", form.checkValidity());
     console.log("validity form: ", form.reportValidity());
+    console.log("title is : ", form.elements['title'].value);
+    console.log("description is : ", form.elements['description'].value);
+    console.log("bolt is : ", form.elements['bolt'].value);
+    console.log("endTime is : ", form.elements['endtime'].value);
+    console.log("nonteId is : ", form.elements['noteid'].value);
 }
 
+function getNewId() {
+    let x = loadNotes().reduce((a, b) => a.id > b.id ? a.id : b.id);
+    return x + 1;
+}
+
+function addNewNote(note) {
+    let notes = loadNotes();
+    notes.push(note);
+    persistNotes(notes);
+}
+
+function updateNote(note) {
+    let notes = loadNotes();
+    let index = notes.findIndex(no => no.id == note.id);
+    notes[index] = note;
+    persistNotes(notes);
+}
+
+function persistNotes(notes) {
+    window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify({notes: notes}));
+}
 
 function getInt(s) {
     return parseInt(s.replace('-',''));

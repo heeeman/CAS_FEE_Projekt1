@@ -55,32 +55,33 @@
     </script>
 
     <script id="edit-template" type="text/x-handlebars-template">
-        <form>
+        <form onsubmit="save(event)">
+            <input name="noteid" type="text"  value="{{id}}" hidden="true" >
             <article class="columnContainer">
                 <div class="rowContainer">
                     <label for="title" class="flexSize1">Titel</label>
-                    <input id="title" type="text" class="editIn flexSize3" value="{{title}}" maxlength="70" required>
+                    <input id="title" name="title" type="text" class="editIn flexSize3" value="{{title}}" maxlength="70" placeholder="schöner Titel" required>
                 </div>
                 <div class="rowContainer">
                     <label for="description" class="flexSize1">Beschreibung</label>
-                    <textarea id="description" class="editIn flexSize3 height10" maxlength="2000" placeholder="Was will ich machen...">{{description}}</textarea>
+                    <textarea id="description" name="description" class="editIn flexSize3 height10" maxlength="2000" placeholder="Was will ich machen...">{{description}}</textarea>
                 </div>
                 <div class="rowContainer">
                     <label class="flexSize1">Wichtigkeit</label>
                     <span class="editIn flexSize3">
-                        <button class="bolt" checked>🗲</button>
-                        <button class="bolt" checked>🗲</button>
-                        <button class="bolt">🗲</button>
-                        <button class="bolt">🗲</button>
-                        <button class="bolt">🗲</button>
+                        <button name="bolt" type="button" class="bolt" checked>🗲</button>
+                        <button name="bolt" type="button" class="bolt" checked>🗲</button>
+                        <button name="bolt" type="button" class="bolt">🗲</button>
+                        <button name="bolt" type="button" class="bolt">🗲</button>
+                        <button name="bolt" type="button" class="bolt">🗲</button>
                     </span>
                 </div>
                 <div class="rowContainer">
                     <label for="endTime" class="flexSize1">Erledigt bis:</label>
-                    <input id="endTime" type="date" class="editIn flexSize1" value="{{dueDate}}" onchange="console.log('finish: ' , value)"  maxlength="10" required>
+                    <input id="endTime"  name="endtime" type="date" class="editIn flexSize1" value="{{dueDate}}" onchange="console.log('finish: ' , value)"  maxlength="10" required>
                     <div class="flexSize2"></div>
                 </div>
-                <button type="button" onclick="save()">Speichern</button>
+                <button>Speichern</button>
                 <button type="button" class="cancelButton" onclick="setContent(MAIN_PAGE, loadNotes())">Cancel</button>
             </article>
         </form>
