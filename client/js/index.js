@@ -1,6 +1,7 @@
 const MAIN_PAGE = "main-template";
 const EDIT_PAGE = "edit-template";
 const LOCALSTORAGE_ID = "CAS_FEE_V1";
+const BOLT = '🗲'
 
 initApplication();
 
@@ -25,6 +26,37 @@ function setContent(htmlTemplate, context) {
     let template = Handlebars.compile(source);
     let html    = template(context);
     document.getElementById("entryPoint").innerHTML = html;
+
+    if(EDIT_PAGE == htmlTemplate) {
+        setBolts(context.priority.length / 2);
+        document.querySelectorAll(".bolt").forEach((btn, index) =>{
+
+            btn.addEventListener("click", (event) =>{
+                console.log('click on bolt');
+
+                setBolts(index + 1);
+
+
+            });
+        });
+    }
+}
+
+function setBolts(clickIndex) {
+    console.log('bolt index , ' , clickIndex);
+    document.querySelectorAll(".bolt").forEach((b, i) => {
+        // console.log('btn index,  checked', i, b.checked)
+        // console.log('btn index,  attrib[]', i, b.attributes['checked'])
+        if ( i < clickIndex) {
+
+            b.setAttribute('checked', null);
+
+        }else {
+
+            b.removeAttribute('checked');
+
+        }
+    })
 }
 
 function loadNoteById(id) {
@@ -71,7 +103,7 @@ function save(event) {
 
     let title = form.elements['title'].value;
     let description = form.elements['description'].value;
-    let bolt = '🗲'; // TODO
+    let bolt = getPriority(form); // TODO
     let endtime = form.elements['endtime'].value;
     let noteId = form.elements['noteid'].value;
 
@@ -93,13 +125,15 @@ function save(event) {
         addNewNote(note);
     }
 
-    console.log("validity form: ", form.checkValidity());
-    console.log("validity form: ", form.reportValidity());
-    console.log("title is : ", form.elements['title'].value);
-    console.log("description is : ", form.elements['description'].value);
-    console.log("bolt is : ", form.elements['bolt'].value);
-    console.log("endTime is : ", form.elements['endtime'].value);
-    console.log("nonteId is : ", form.elements['noteid'].value);
+
+
+}
+
+function getPriority(form) {
+    let bolts = form.elements['bolt'];
+    let priority = "";
+    bolts.forEach(el => { if(el.hasAttribute('checked')) priority += BOLT });
+    return priority;
 }
 
 function getNewId() {
