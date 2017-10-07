@@ -1,11 +1,15 @@
 const MAIN_PAGE = "main-template";
 const EDIT_PAGE = "edit-template";
-const LOCALSTORAGE_ID = "CAS_FEE_V1";
+// const LOCALSTORAGE_ID = "CAS_FEE_V1";
 const BOLT = '🗲'
+
+let model;
 
 initApplication();
 
 function initApplication() {
+
+    model = new Notelist();
 
     //testcode
     // console.log("ACHTUNG : TESTCODE - SCHREIBT FIXE NOTES IN DEN LOCALSTORAGE");
@@ -18,7 +22,7 @@ function initApplication() {
     });
 
     // laden der Daten und rendern des main page
-    setContent(MAIN_PAGE, loadNotes());
+    setContent(MAIN_PAGE, model.getNotes());
 }
 
 function setContent(htmlTemplate, context) {
@@ -28,7 +32,7 @@ function setContent(htmlTemplate, context) {
     document.getElementById("entryPoint").innerHTML = html;
 
     if(EDIT_PAGE == htmlTemplate) {
-        setBolts(context.priority.length / 2);
+        setBolts(context.priority ? context.priority.length / 2 : 0);
         document.querySelectorAll(".bolt").forEach((btn, index) =>{
 
             btn.addEventListener("click", (event) =>{
@@ -39,8 +43,12 @@ function setContent(htmlTemplate, context) {
 
             });
         });
+    }else {
+        let mainView = new MainView();
+        mainView.addCreateNoteListener(() => setContent(EDIT_PAGE, {}));
     }
 }
+
 
 function setBolts(clickIndex) {
     console.log('bolt index , ' , clickIndex);
@@ -59,40 +67,40 @@ function setBolts(clickIndex) {
     })
 }
 
-function loadNoteById(id) {
-    if (!id) return {};
-    let a= loadNotes().filter(note => note.id == id);
-    return a.length > 0 ? a[0] : {};
-}
-
-/**
- * lädt die Notes vom Server und gibt ein Array von notes zurück.
- * Die Methode liefert ein leeres Array wenn keine Notes da sind.
- * @returns {{notes: [null,null,null]}}
- */
-function loadNotes() {
-
-    var noteString = window.localStorage.getItem(LOCALSTORAGE_ID);
-    if (!noteString || noteString == 'undefined') return [];
-    return JSON.parse(noteString).notes;
-}
+// function loadNoteById(id) {
+//     if (!id) return {};
+//     let a= loadNotes().filter(note => note.id == id);
+//     return a.length > 0 ? a[0] : {};
+// }
+//
+// /**
+//  * lädt die Notes vom Server und gibt ein Array von notes zurück.
+//  * Die Methode liefert ein leeres Array wenn keine Notes da sind.
+//  * @returns {{notes: [null,null,null]}}
+//  */
+// function loadNotes() {
+//
+//     var noteString = window.localStorage.getItem(LOCALSTORAGE_ID);
+//     if (!noteString || noteString == 'undefined') return [];
+//     return JSON.parse(noteString).notes;
+// }
 
 function changeStyle(filename) {
     document.getElementById('baseStyleSheet').href = '../css/' + filename + '.css';
 }
 
 function sortNotesOnFinishDate() {
-    let newOrder = loadNotes().sort((a, b) => getInt(b.dueDate) - getInt(a.dueDate));
+    let newOrder = model.getNotes().sort((a, b) => getInt(b.dueDate) - getInt(a.dueDate));
     setContent(MAIN_PAGE, newOrder);
 }
 
 function sortNotesOnIssueDate() {
-    let newOrder = loadNotes().sort((a, b) => getInt(b.issueDate) - getInt(a.issueDate));
+    let newOrder = model.getNotes().sort((a, b) => getInt(b.issueDate) - getInt(a.issueDate));
     setContent(MAIN_PAGE, newOrder);
 }
 
 function sortNotesOnPriority() {
-    let newOrder = loadNotes().sort((a, b) => b.priority.length - a.priority.length);
+    let newOrder = model.getNotes().sort((a, b) => b.priority.length - a.priority.length);
     setContent(MAIN_PAGE, newOrder);
 }
 
@@ -120,9 +128,9 @@ function save(event) {
     }
 
     if (noteId) {
-        updateNote(note);
+        model.updateNote(note);
     }else {
-        addNewNote(note);
+        model.addNewNote(note);
     }
 
 
@@ -136,65 +144,62 @@ function getPriority(form) {
     return priority;
 }
 
-function getNewId() {
-    let x = loadNotes().reduce((a, b) => a.id > b.id ? a.id : b.id);
-    return x + 1;
-}
 
-function addNewNote(note) {
-    let notes = loadNotes();
-    notes.push(note);
-    persistNotes(notes);
-}
 
-function updateNote(note) {
-    let notes = loadNotes();
-    let index = notes.findIndex(no => no.id == note.id);
-    notes[index] = note;
-    persistNotes(notes);
-}
+// function addNewNote(note) {
+//     let notes = loadNotes();
+//     notes.push(note);
+//     persistNotes(notes);
+// }
 
-function persistNotes(notes) {
-    window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify({notes: notes}));
-}
+// function updateNote(note) {
+//     let notes = loadNotes();
+//     let index = notes.findIndex(no => no.id == note.id);
+//     notes[index] = note;
+//     persistNotes(notes);
+// }
+
+// function persistNotes(notes) {
+//     window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify({notes: notes}));
+// }
 
 function getInt(s) {
     return parseInt(s.replace('-',''));
 }
 
 // ab hier testcode
-
-function getTestData() {
-    return {
-        notes: [
-            {
-                title: "My New Post",
-                issueDate: "2017-03-17",
-                dueDate: "2017-10-17",
-                description: "This is my first post!",
-                priority: "",
-                finished: "checked",
-                id: 1
-            },
-            {
-                title: "Rasen mähen",
-                issueDate: "2017-01-12",
-                dueDate: "2018-09-12",
-                description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
-                "und \n endlich die Rosen schneiden",
-                priority: "🗲🗲🗲🗲🗲",
-                finished: "",
-                id: 2
-            },
-            {
-                title: "einkaufen",
-                issueDate: "2017-02-12",
-                dueDate: "2017-09-12",
-                description: "Für Fest einen Braten und etwas Feuerwasser." +
-                "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-                priority: "🗲🗲🗲",
-                finished: "",
-                id: 3
-            }]
-    };
-}
+//
+// function getTestData() {
+//     return {
+//         notes: [
+//             {
+//                 title: "My New Post",
+//                 issueDate: "2017-03-17",
+//                 dueDate: "2017-10-17",
+//                 description: "This is my first post!",
+//                 priority: "",
+//                 finished: "checked",
+//                 id: 1
+//             },
+//             {
+//                 title: "Rasen mähen",
+//                 issueDate: "2017-01-12",
+//                 dueDate: "2018-09-12",
+//                 description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
+//                 "und \n endlich die Rosen schneiden",
+//                 priority: "🗲🗲🗲🗲🗲",
+//                 finished: "",
+//                 id: 2
+//             },
+//             {
+//                 title: "einkaufen",
+//                 issueDate: "2017-02-12",
+//                 dueDate: "2017-09-12",
+//                 description: "Für Fest einen Braten und etwas Feuerwasser." +
+//                 "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
+//                 priority: "🗲🗲🗲",
+//                 finished: "",
+//                 id: 3
+//             }]
+//     };
+// }

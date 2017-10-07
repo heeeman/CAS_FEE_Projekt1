@@ -17,7 +17,7 @@
     <script id="main-template" type="text/x-handlebars-template">
         <header class=".columnContainer">
             <div class="rowContainer between">
-                <Button class="flexSize1" onclick="setContent(EDIT_PAGE, {});">Create new Note</Button>
+                <Button id="createButton" class="flexSize1">Create new Note</Button>
                 <span class="flexSize1"></span>
                 <span class="flexSize1"></span>
                 <span class="flexSize1"></span>
@@ -50,7 +50,7 @@
                 </div>
                 <textarea readonly>{{description}}</textarea>
             </section>
-            <button class="flexSize1 editbutton" onclick="setContent(EDIT_PAGE, loadNoteById({{id}}));">Edit</button>
+            <button class="flexSize1 editbutton" onclick="setContent(EDIT_PAGE, model.loadNoteById({{id}}));">Edit</button>
         </article>
         {{/each}}
     </script>
@@ -89,6 +89,8 @@
 
     </script>
     <script src="../lib/handlebars-v4.0.10.js"></script>
+    <script src="../js/model.js"></script>
+    <script src="../js/view.js"></script>
     <script src="../js/index.js"></script>
     <footer>
         <p>© 2017 by Heeeman</p>
