@@ -21,18 +21,17 @@
                 <span class="flexSize1"></span>
                 <span class="flexSize1"></span>
                 <span class="flexSize1"></span>
-                <select class="flexSize1" oninput="changeStyle(value)" >
+                <select class="flexSize1">
                     <option value="base">Default-Style</option>
                     <option value="baseFrame">Frame-Style</option>
                 </select>
             </div>
             <div class="rowContainer between">
-                <!-- Todo checked Attribute ersetzen -> nicht valid mit button-->
-                <button class="flexSize1" onclick="sortNotesOnFinishDate()">By finish Date</button>
-                <button class="flexSize1" onclick="sortNotesOnIssueDate()">By created Date</button>
-                <button class="flexSize1" onclick="sortNotesOnPriority()">By Importance</button>
+                <button class="flexSize1 js-sort" data-sort-type="finishdate">By finish Date</button>
+                <button class="flexSize1 js-sort" data-sort-type="issuedate">By created Date</button>
+                <button class="flexSize1 js-sort" data-sort-type="priority">By Importance</button>
                 <span class="flexSize1"></span>
-                <button class="flexSize1">Show finished</button>
+                <button class="flexSize1 js-filter" data-filter-type="finished">Show finished</button>
             </div>
         </header>
         {{#each this}} <!-- speziale damit ich direkt ein array übergeben kann und dieses nicht in ein Obj packen muss-->
@@ -70,6 +69,7 @@
                 <div class="rowContainer">
                     <label class="flexSize1">Wichtigkeit</label>
                     <span class="editIn flexSize3">
+                        <!-- Todo checked Attribute ersetzen -> nicht valid mit button-->
                         <button name="bolt" type="button" class="bolt" checked>🗲</button>
                         <button name="bolt" type="button" class="bolt" checked>🗲</button>
                         <button name="bolt" type="button" class="bolt">🗲</button>

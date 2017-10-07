@@ -11,10 +11,6 @@ function initApplication() {
 
     model = new Notelist();
 
-    //testcode
-    // console.log("ACHTUNG : TESTCODE - SCHREIBT FIXE NOTES IN DEN LOCALSTORAGE");
-    // persistNotes(getTestData().notes);
-    // ende testcode
 
     // registriert die notwendigen Helper im Handlebar
     Handlebars.registerHelper('dateConverter', function(dateString){
@@ -46,6 +42,8 @@ function setContent(htmlTemplate, context) {
     }else {
         let mainView = new MainView();
         mainView.addCreateNoteListener(() => setContent(EDIT_PAGE, {}));
+        mainView.addSorter(sort);
+        mainView.addFilter(filter)
     }
 }
 
@@ -67,42 +65,29 @@ function setBolts(clickIndex) {
     })
 }
 
-// function loadNoteById(id) {
-//     if (!id) return {};
-//     let a= loadNotes().filter(note => note.id == id);
-//     return a.length > 0 ? a[0] : {};
-// }
-//
-// /**
-//  * lädt die Notes vom Server und gibt ein Array von notes zurück.
-//  * Die Methode liefert ein leeres Array wenn keine Notes da sind.
-//  * @returns {{notes: [null,null,null]}}
-//  */
-// function loadNotes() {
-//
-//     var noteString = window.localStorage.getItem(LOCALSTORAGE_ID);
-//     if (!noteString || noteString == 'undefined') return [];
-//     return JSON.parse(noteString).notes;
-// }
 
-function changeStyle(filename) {
-    document.getElementById('baseStyleSheet').href = '../css/' + filename + '.css';
+
+var sortActions = {
+    finishdate: (a, b) => getInt(b.dueDate) - getInt(a.dueDate),
+    issuedate : (a, b) => getInt(b.issueDate) - getInt(a.issueDate),
+    priority : (a, b) => b.priority.length - a.priority.length
 }
 
-function sortNotesOnFinishDate() {
-    let newOrder = model.getNotes().sort((a, b) => getInt(b.dueDate) - getInt(a.dueDate));
+function sort(event){
+    let newOrder = model.getNotes().sort(sortActions[event.currentTarget.dataset.sortType]);
     setContent(MAIN_PAGE, newOrder);
 }
 
-function sortNotesOnIssueDate() {
-    let newOrder = model.getNotes().sort((a, b) => getInt(b.issueDate) - getInt(a.issueDate));
+var filterActions = {
+    finished: (note) => note.finished == 'checked'
+}
+
+function filter(event){
+    let newOrder = model.getNotes().filter(filterActions[event.currentTarget.dataset.filterType]);
     setContent(MAIN_PAGE, newOrder);
 }
 
-function sortNotesOnPriority() {
-    let newOrder = model.getNotes().sort((a, b) => b.priority.length - a.priority.length);
-    setContent(MAIN_PAGE, newOrder);
-}
+
 
 function save(event) {
     console.log("TODO save()");
@@ -119,7 +104,7 @@ function save(event) {
 
     let note =             {
         title: title,
-        issueDate: "2017-03-17",
+        issueDate: new Date().toDateString(),
         dueDate: endtime,
         description: description,
         priority: bolt,
@@ -145,61 +130,7 @@ function getPriority(form) {
 }
 
 
-
-// function addNewNote(note) {
-//     let notes = loadNotes();
-//     notes.push(note);
-//     persistNotes(notes);
-// }
-
-// function updateNote(note) {
-//     let notes = loadNotes();
-//     let index = notes.findIndex(no => no.id == note.id);
-//     notes[index] = note;
-//     persistNotes(notes);
-// }
-
-// function persistNotes(notes) {
-//     window.localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify({notes: notes}));
-// }
-
 function getInt(s) {
     return parseInt(s.replace('-',''));
 }
 
-// ab hier testcode
-//
-// function getTestData() {
-//     return {
-//         notes: [
-//             {
-//                 title: "My New Post",
-//                 issueDate: "2017-03-17",
-//                 dueDate: "2017-10-17",
-//                 description: "This is my first post!",
-//                 priority: "",
-//                 finished: "checked",
-//                 id: 1
-//             },
-//             {
-//                 title: "Rasen mähen",
-//                 issueDate: "2017-01-12",
-//                 dueDate: "2018-09-12",
-//                 description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
-//                 "und \n endlich die Rosen schneiden",
-//                 priority: "🗲🗲🗲🗲🗲",
-//                 finished: "",
-//                 id: 2
-//             },
-//             {
-//                 title: "einkaufen",
-//                 issueDate: "2017-02-12",
-//                 dueDate: "2017-09-12",
-//                 description: "Für Fest einen Braten und etwas Feuerwasser." +
-//                 "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-//                 priority: "🗲🗲🗲",
-//                 finished: "",
-//                 id: 3
-//             }]
-//     };
-// }

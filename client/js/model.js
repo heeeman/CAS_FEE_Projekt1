@@ -19,8 +19,11 @@ class Notelist {
     }
 
     updateNote(note) {
-        let index = this.notes.findIndex(no => no.id == note.id);
-        this.notes[index] = note;
+        let toUpdate = this.notes.find(no => no.id == note.id);
+        toUpdate.title = note.title;
+        toUpdate.dueDate = note.dueDate;
+        toUpdate.description = note.description;
+        toUpdate.priority = note.priority;
         this.persistNotes();
     }
 
