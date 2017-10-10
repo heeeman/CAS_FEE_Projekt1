@@ -30,6 +30,21 @@ class MainView {
 
 class EditView {
 
+    init(priority) {
+
+        this.setBolts(priority ? priority.length / 2 : 0);
+        document.querySelectorAll(".bolt").forEach((btn, index) =>{
+
+            btn.addEventListener("click", (event) =>{
+                console.log('click on bolt');
+
+                this.setBolts(index + 1);
+
+
+            });
+        });
+
+    }
 
     addCancelListener(eventListener) {
         document.querySelector('.cancelButton').addEventListener('click', eventListener);
@@ -63,5 +78,18 @@ class EditView {
     }
 
 
+    setBolts(clickIndex) {
+        console.log('bolt index , ' , clickIndex);
+        document.querySelectorAll(".bolt").forEach((b, i) => {
+            // console.log('btn index,  checked', i, b.checked)
+            // console.log('btn index,  attrib[]', i, b.attributes['checked'])
+            if ( i < clickIndex) {
+
+                b.setAttribute('checked', null);
+            }else {
+                b.removeAttribute('checked');
+            }
+        })
+    }
 
 }

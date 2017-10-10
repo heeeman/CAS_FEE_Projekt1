@@ -33,20 +33,9 @@ function setContent(htmlTemplate, context) {
 
     if(EDIT_PAGE == htmlTemplate) {
 
+        editView.init(context.priority);
         editView.addCancelListener(() => setContent(MAIN_PAGE, model.getNotes()));
         editView.addSaveListener(() => save());
-
-        setBolts(context.priority ? context.priority.length / 2 : 0);
-        document.querySelectorAll(".bolt").forEach((btn, index) =>{
-
-            btn.addEventListener("click", (event) =>{
-                console.log('click on bolt');
-
-                setBolts(index + 1);
-
-
-            });
-        });
     }else {
 
         mainView.init();
@@ -54,21 +43,6 @@ function setContent(htmlTemplate, context) {
         mainView.addSorter(sort);
         mainView.addFilter(filter)
     }
-}
-
-
-function setBolts(clickIndex) {
-    console.log('bolt index , ' , clickIndex);
-    document.querySelectorAll(".bolt").forEach((b, i) => {
-        // console.log('btn index,  checked', i, b.checked)
-        // console.log('btn index,  attrib[]', i, b.attributes['checked'])
-        if ( i < clickIndex) {
-
-            b.setAttribute('checked', null);
-        }else {
-            b.removeAttribute('checked');
-        }
-    })
 }
 
 var sortActions = {
