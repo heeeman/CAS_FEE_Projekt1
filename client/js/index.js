@@ -65,20 +65,15 @@ function setBolts(clickIndex) {
         if ( i < clickIndex) {
 
             b.setAttribute('checked', null);
-
         }else {
-
             b.removeAttribute('checked');
-
         }
     })
 }
 
-
-
 var sortActions = {
     finishdate: (a, b) => getInt(b.dueDate) - getInt(a.dueDate),
-    issuedate : (a, b) => getInt(b.issueDate) - getInt(a.issueDate),
+    issuedate : (a, b) => b.issueDate - a.issueDate,
     priority : (a, b) => b.priority.length - a.priority.length
 }
 
@@ -96,14 +91,10 @@ function filter(event){
     setContent(MAIN_PAGE, newOrder);
 }
 
-
-
-function save(event) {
-    console.log("TODO save()");
-
+function save() {
     let note =             {
         title: editView.getTitle(),
-        issueDate: new Date().toDateString(),
+        issueDate: new Date().getTime(),
         dueDate: editView.getEndtime(),
         description: editView.getDescription(),
         priority: editView.getPriority(),
@@ -118,15 +109,9 @@ function save(event) {
     }
 
     setContent(MAIN_PAGE, model.getNotes());
-
-
-
 }
 
-
-
-
 function getInt(s) {
-    return parseInt(s.replace('-',''));
+    return parseInt(s.replace(/-/g, ''));
 }
 

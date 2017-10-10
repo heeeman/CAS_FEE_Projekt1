@@ -58,7 +58,7 @@ class Notelist {
         let notes = [
             {
                 title: "My New Post",
-                issueDate: "2017-03-17",
+                issueDate: new Date("2017-03-17").getTime(),
                 dueDate: "2017-10-17",
                 description: "This is my first post!",
                 priority: "",
@@ -67,7 +67,7 @@ class Notelist {
             },
             {
                 title: "Rasen mähen",
-                issueDate: "2017-01-12",
+                issueDate: new Date("2017-01-12").getTime(),
                 dueDate: "2018-09-12",
                 description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
                 "und \n endlich die Rosen schneiden",
@@ -77,7 +77,7 @@ class Notelist {
             },
             {
                 title: "einkaufen",
-                issueDate: "2017-02-12",
+                issueDate: new Date("2017-02-12").getTime(),
                 dueDate: "2017-09-12",
                 description: "Für Fest einen Braten und etwas Feuerwasser." +
                 "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
