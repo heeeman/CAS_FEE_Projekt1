@@ -61,7 +61,7 @@ button, select, span{
     width: 5%;
 }
 
-.bolt[checked] {
+.bolt.checked {
     color: black;
 }
 
