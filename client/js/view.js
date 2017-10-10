@@ -1,8 +1,6 @@
 class MainView {
 
-    constructor(){
-        this.init();
-    }
+
 
     init () {
         document.getElementsByTagName('select')[0].
@@ -28,5 +26,42 @@ class MainView {
         document.querySelectorAll(".js-filter").forEach(e =>
             e.addEventListener('click',eventListener));
     }
+}
+
+class EditView {
+
+
+    addCancelListener(eventListener) {
+        document.querySelector('.cancelButton').addEventListener('click', eventListener);
+    }
+
+    addSaveListener(eventListener) {
+        document.querySelector('.saveButton').addEventListener('click', eventListener);
+    }
+
+    getTitle() {
+        return title.value;
+    }
+
+    getEndtime() {
+        return endTime.value;
+    }
+
+    getDescription() {
+        return description.value;
+    }
+
+    getPriority() {
+        let bolts = document.querySelectorAll('.bolt');
+        let priority = "";
+        bolts.forEach(el => { if(el.hasAttribute('checked')) priority += BOLT });
+        return priority;
+    }
+
+    getNoteId() {
+        return noteid.value;
+    }
+
+
 
 }

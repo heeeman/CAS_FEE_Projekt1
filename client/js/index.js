@@ -4,12 +4,16 @@ const EDIT_PAGE = "edit-template";
 const BOLT = '🗲'
 
 let model;
+let mainView;
+let editView;
 
 initApplication();
 
 function initApplication() {
 
     model = new Notelist();
+    mainView = new MainView();
+    editView = new EditView();
 
 
     // registriert die notwendigen Helper im Handlebar
@@ -28,6 +32,10 @@ function setContent(htmlTemplate, context) {
     document.getElementById("entryPoint").innerHTML = html;
 
     if(EDIT_PAGE == htmlTemplate) {
+
+        editView.addCancelListener(() => setContent(MAIN_PAGE, model.getNotes()));
+        editView.addSaveListener(() => save());
+
         setBolts(context.priority ? context.priority.length / 2 : 0);
         document.querySelectorAll(".bolt").forEach((btn, index) =>{
 
@@ -40,7 +48,8 @@ function setContent(htmlTemplate, context) {
             });
         });
     }else {
-        let mainView = new MainView();
+
+        mainView.init();
         mainView.addCreateNoteListener(() => setContent(EDIT_PAGE, {}));
         mainView.addSorter(sort);
         mainView.addFilter(filter)
@@ -91,43 +100,30 @@ function filter(event){
 
 function save(event) {
     console.log("TODO save()");
-    console.log("submit event: ", event);
-    var form = document.getElementsByTagName("form")[0];
-
-    let title = form.elements['title'].value;
-    let description = form.elements['description'].value;
-    let bolt = getPriority(form); // TODO
-    let endtime = form.elements['endtime'].value;
-    let noteId = form.elements['noteid'].value;
-
-
 
     let note =             {
-        title: title,
+        title: editView.getTitle(),
         issueDate: new Date().toDateString(),
-        dueDate: endtime,
-        description: description,
-        priority: bolt,
+        dueDate: editView.getEndtime(),
+        description: editView.getDescription(),
+        priority: editView.getPriority(),
         finished: "",
-        id: noteId
+        id: editView.getNoteId()
     }
 
-    if (noteId) {
+    if (note.id) {
         model.updateNote(note);
     }else {
         model.addNewNote(note);
     }
 
+    setContent(MAIN_PAGE, model.getNotes());
+
 
 
 }
 
-function getPriority(form) {
-    let bolts = form.elements['bolt'];
-    let priority = "";
-    bolts.forEach(el => { if(el.hasAttribute('checked')) priority += BOLT });
-    return priority;
-}
+
 
 
 function getInt(s) {
