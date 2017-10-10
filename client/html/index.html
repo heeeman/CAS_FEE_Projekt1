@@ -49,7 +49,7 @@
                 </div>
                 <textarea readonly>{{description}}</textarea>
             </section>
-            <button class="flexSize1 editbutton" onclick="setContent(EDIT_PAGE, model.loadNoteById({{id}}));">Edit</button>
+            <button class="flexSize1 editbutton" data-note-id="{{id}}">Edit</button>
         </article>
         {{/each}}
     </script>

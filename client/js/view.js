@@ -26,9 +26,18 @@ class MainView {
         document.querySelectorAll(".js-filter").forEach(e =>
             e.addEventListener('click',eventListener));
     }
+
+    addEditNoteListener(eventListener) {
+        document.querySelectorAll(".editbutton").forEach(e =>
+            e.addEventListener('click', eventListener));
+    }
 }
 
 class EditView {
+
+    constructor(){
+        this.BOLT = '🗲';
+    }
 
     init(priority) {
 
@@ -63,7 +72,7 @@ class EditView {
     getPriority() {
         let bolts = document.querySelectorAll('.bolt');
         let priority = "";
-        bolts.forEach(el => { if(el.classList.contains('checked')) priority += BOLT });
+        bolts.forEach(el => { if(el.classList.contains('checked')) priority += this.BOLT });
         return priority;
     }
 
@@ -71,9 +80,7 @@ class EditView {
         return noteid.value;
     }
 
-
     setBolts(clickIndex) {
-        console.log('bolt index , ' , clickIndex);
         document.querySelectorAll(".bolt").forEach((b, i) => {
             if ( i < clickIndex) {
                 b.classList.add('checked');

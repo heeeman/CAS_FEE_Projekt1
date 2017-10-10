@@ -1,7 +1,5 @@
 const MAIN_PAGE = "main-template";
 const EDIT_PAGE = "edit-template";
-// const LOCALSTORAGE_ID = "CAS_FEE_V1";
-const BOLT = '🗲'
 
 let model;
 let mainView;
@@ -41,8 +39,13 @@ function setContent(htmlTemplate, context) {
         mainView.init();
         mainView.addCreateNoteListener(() => setContent(EDIT_PAGE, {}));
         mainView.addSorter(sort);
-        mainView.addFilter(filter)
+        mainView.addFilter(filter);
+        mainView.addEditNoteListener(editNote);
     }
+}
+
+function editNote(event) {
+    setContent(EDIT_PAGE, model.loadNoteById(event.target.dataset.noteId));
 }
 
 var sortActions = {
