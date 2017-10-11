@@ -39,7 +39,7 @@ class Controller {
 
             this.editView.init(context.priority);
             this.editView.addCancelListener(() => this.setContent(MAIN_PAGE, this.model.getNotes()));
-            this.editView.addSaveListener(() => this.save());
+            this.editView.addSaveListener((form) => this.save(form));
         }else {
 
             this.mainView.init();
@@ -64,7 +64,7 @@ class Controller {
         this.setContent(MAIN_PAGE, newOrder);
     }
 
-    save() {
+    save(form) {
         let note =             {
             title: this.editView.getTitle(),
             issueDate: new Date().getTime(),
@@ -82,6 +82,7 @@ class Controller {
         }
 
         this.setContent(MAIN_PAGE, this.model.getNotes());
+        return false;  // cancel form submission -> we don't need in SPA
     }
 
     getInt(s) {

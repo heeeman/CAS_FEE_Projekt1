@@ -55,36 +55,36 @@
     </script>
 
     <script id="edit-template" type="text/x-handlebars-template">
-        <input id="noteid" type="text"  value="{{id}}" hidden="true" >
-        <article class="columnContainer">
-            <div class="rowContainer">
-                <label for="title" class="flexSize1">Titel</label>
-                <input id="title" name="title" type="text" class="editIn flexSize3" value="{{title}}" maxlength="70" placeholder="schöner Titel" required>
-            </div>
-            <div class="rowContainer">
-                <label for="description" class="flexSize1">Beschreibung</label>
-                <textarea id="description" name="description" class="editIn flexSize3 height10" maxlength="2000" placeholder="Was will ich machen...">{{description}}</textarea>
-            </div>
-            <div class="rowContainer">
-                <label class="flexSize1">Wichtigkeit</label>
-                <span class="editIn flexSize3">
-                    <button name="bolt" type="button" class="bolt">🗲</button>
-                    <button name="bolt" type="button" class="bolt">🗲</button>
-                    <button name="bolt" type="button" class="bolt">🗲</button>
-                    <button name="bolt" type="button" class="bolt">🗲</button>
-                    <button name="bolt" type="button" class="bolt">🗲</button>
-                </span>
-            </div>
-            <div class="rowContainer">
-                <label for="endTime" class="flexSize1">Erledigt bis:</label>
-                <input id="endTime"  name="endtime" type="date" class="editIn flexSize1" value="{{dueDate}}" maxlength="10" required>
-                <div class="flexSize2"></div>
-            </div>
-            <button type="button" class="saveButton">Speichern</button>
-            <button type="button" class="cancelButton">Cancel</button>
-        </article>
-
-
+        <form>  <!-- only for validation -->
+            <input id="noteid" type="text"  value="{{id}}" hidden="true" >
+            <article class="columnContainer">
+                <div class="rowContainer">
+                    <label for="title" class="flexSize1">Titel</label>
+                    <input id="title" name="title" type="text" class="editIn flexSize3" value="{{title}}" maxlength="70" placeholder="schöner Titel" required>
+                </div>
+                <div class="rowContainer">
+                    <label for="description" class="flexSize1">Beschreibung</label>
+                    <textarea id="description" name="description" class="editIn flexSize3 height10" maxlength="2000" placeholder="Was will ich machen...">{{description}}</textarea>
+                </div>
+                <div class="rowContainer">
+                    <label class="flexSize1">Wichtigkeit</label>
+                    <span class="editIn flexSize3">
+                        <button name="bolt" type="button" class="bolt">🗲</button>
+                        <button name="bolt" type="button" class="bolt">🗲</button>
+                        <button name="bolt" type="button" class="bolt">🗲</button>
+                        <button name="bolt" type="button" class="bolt">🗲</button>
+                        <button name="bolt" type="button" class="bolt">🗲</button>
+                    </span>
+                </div>
+                <div class="rowContainer">
+                    <label for="endTime" class="flexSize1">Erledigt bis:</label>
+                    <input id="endTime"  name="endtime" type="date" class="editIn flexSize1" value="{{dueDate}}" maxlength="10" required>
+                    <div class="flexSize2"></div>
+                </div>
+                <button type="submit" class="saveButton">Speichern</button>
+                <button type="button" class="cancelButton">Cancel</button>
+            </article>
+        </form>
     </script>
     <script src="../lib/handlebars-v4.0.10.js"></script>
     <script src="../js/model.js"></script>

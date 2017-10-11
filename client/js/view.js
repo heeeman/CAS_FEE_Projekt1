@@ -52,7 +52,8 @@ class EditView {
     }
 
     addSaveListener(eventListener) {
-        document.querySelector('.saveButton').addEventListener('click', eventListener);
+        // onsubmit muss gesetzt sein, ansonsten kann der browser ne Warning schmeissen
+        document.querySelector('form').onsubmit = eventListener;
     }
 
     getTitle() {
