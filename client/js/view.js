@@ -1,7 +1,5 @@
 class MainView {
 
-
-
     init () {
         document.getElementsByTagName('select')[0].
             addEventListener('input', this.changeStyle);
