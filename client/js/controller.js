@@ -26,6 +26,7 @@ class Controller {
         this.sortListener = this.sort.bind(this);
         this.filterListener = this.filter.bind(this);
         this.editListener = this.editNote.bind(this);
+        this.finishedListener = this.finishNote.bind(this);
     }
 
 
@@ -47,7 +48,14 @@ class Controller {
             this.mainView.addSorter(this.sortListener);
             this.mainView.addFilter(this.filterListener);
             this.mainView.addEditNoteListener(this.editListener);
+            this.mainView.addFinishedListener(this.finishedListener);
         }
+    }
+
+    finishNote(event) {
+        let note = this.model.loadNoteById(event.target.dataset.noteId);
+        note.finished = event.target.checked ? 'checked' : "";
+        this.model.updateNote(note);
     }
 
     editNote(event) {

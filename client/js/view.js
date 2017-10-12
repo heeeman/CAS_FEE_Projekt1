@@ -29,6 +29,11 @@ class MainView {
         document.querySelectorAll(".editbutton").forEach(e =>
             e.addEventListener('click', eventListener));
     }
+
+    addFinishedListener(eventListener) {
+        document.querySelectorAll("input[type='checkbox']").forEach(e =>
+            e.addEventListener('click', eventListener));
+    }
 }
 
 class EditView {

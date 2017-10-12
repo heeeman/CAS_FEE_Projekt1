@@ -1,5 +1,7 @@
 
 
+// vielleicht noch ein window onload o.ä. einbauen
+
 (function initApplication() {
 
     // registriert die notwendigen Helper im Handlebar

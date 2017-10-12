@@ -39,7 +39,7 @@
             <section class="flexSize1 columnContainer space">
                 <h3>{{#dateConverter dueDate}}{{/dateConverter}}</h3>
                 <div>
-                    <input type="checkbox" disabled {{finished}}>   Finish</input>
+                    <input type="checkbox" {{finished}} data-note-id="{{id}}">   Finish</input>
                 </div>
             </section>
             <section class="flexSize3 columnContainer">
@@ -56,6 +56,9 @@
 
     <script id="edit-template" type="text/x-handlebars-template">
         <form>  <!-- only for validation -->
+
+            <!-- die name attrib könnten wieder raus, diese wurden nur für die version mit form submit benötigt-->
+
             <input id="noteid" type="text"  value="{{id}}" hidden="true" >
             <article class="columnContainer">
                 <div class="rowContainer">

@@ -1,3 +1,11 @@
+/*
+TODO
+
+(Revealing) Module Pattern für die "Datenklassen" erstellen. IIFE anwenden.
+
+ */
+
+
 class Notelist {
 
     constructor() {
