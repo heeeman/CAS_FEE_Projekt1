@@ -3,6 +3,11 @@ class MainView {
     init () {
         this.initStyleSeletor();
         document.querySelector('select.style-sheet').addEventListener('input', this.changeStyle);
+        document.getElementById("createButton").addEventListener('click', this.createNoteListener);
+        document.querySelectorAll(".js-sort").forEach(e => e.addEventListener('click', this.sortListener));
+        document.querySelectorAll(".js-filter").forEach(e => e.addEventListener('click', this.filterListener));
+        document.querySelectorAll(".editbutton").forEach(e => e.addEventListener('click', this.editNoteListener));
+        document.querySelectorAll("input[type='checkbox']").forEach(e => e.addEventListener('click', this.finishedListener));
     }
 
     initStyleSeletor() {
@@ -20,27 +25,23 @@ class MainView {
 
 
     addCreateNoteListener(eventListener) {
-        document.getElementById("createButton").addEventListener('click', eventListener);
+        this.createNoteListener = eventListener;
     }
 
     addSorter(eventListener){
-        document.querySelectorAll(".js-sort").forEach(e =>
-            e.addEventListener('click',eventListener));
+        this.sortListener = eventListener;
     }
 
     addFilter(eventListener){
-        document.querySelectorAll(".js-filter").forEach(e =>
-            e.addEventListener('click',eventListener));
+        this.filterListener = eventListener;
     }
 
     addEditNoteListener(eventListener) {
-        document.querySelectorAll(".editbutton").forEach(e =>
-            e.addEventListener('click', eventListener));
+        this.editNoteListener = eventListener;
     }
 
     addFinishedListener(eventListener) {
-        document.querySelectorAll("input[type='checkbox']").forEach(e =>
-            e.addEventListener('click', eventListener));
+        this.finishedListener = eventListener;
     }
 }
 
@@ -58,15 +59,19 @@ class EditView {
                 this.setBolts(index + 1);
             });
         });
+
+        document.querySelector('.cancelButton').addEventListener('click', this.cancelListener);
+        // onsubmit muss gesetzt sein, ansonsten kann der browser ne Warning schmeissen
+        document.querySelector('form').onsubmit = this.saveListener;
+
     }
 
     addCancelListener(eventListener) {
-        document.querySelector('.cancelButton').addEventListener('click', eventListener);
+        this.cancelListener = eventListener;
     }
 
     addSaveListener(eventListener) {
-        // onsubmit muss gesetzt sein, ansonsten kann der browser ne Warning schmeissen
-        document.querySelector('form').onsubmit = eventListener;
+        this.saveListener = eventListener;
     }
 
     getTitle() {

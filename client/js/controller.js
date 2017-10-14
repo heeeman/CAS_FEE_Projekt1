@@ -23,10 +23,15 @@ class Controller {
         this.filterActions = {
             finished: (note) => note.finished == 'checked'
         }
-        this.sortListener = this.sort.bind(this);
-        this.filterListener = this.filter.bind(this);
-        this.editListener = this.editNote.bind(this);
-        this.finishedListener = this.finishNote.bind(this);
+
+        this.mainView.addCreateNoteListener(() => this.setContent(EDIT_PAGE, {}));
+        this.mainView.addSorter(this.sort.bind(this));
+        this.mainView.addFilter(this.filter.bind(this));
+        this.mainView.addEditNoteListener(this.editNote.bind(this));
+        this.mainView.addFinishedListener(this.finishNote.bind(this));
+
+        this.editView.addCancelListener(() => this.setContent(MAIN_PAGE, this.model.getNotes()));
+        this.editView.addSaveListener((form) => this.save(form));
     }
 
 
@@ -37,18 +42,9 @@ class Controller {
         document.getElementById("entryPoint").innerHTML = html;
 
         if(EDIT_PAGE == htmlTemplate) {
-
             this.editView.init(context.priority);
-            this.editView.addCancelListener(() => this.setContent(MAIN_PAGE, this.model.getNotes()));
-            this.editView.addSaveListener((form) => this.save(form));
         }else {
-
             this.mainView.init();
-            this.mainView.addCreateNoteListener(() => this.setContent(EDIT_PAGE, {}));
-            this.mainView.addSorter(this.sortListener);
-            this.mainView.addFilter(this.filterListener);
-            this.mainView.addEditNoteListener(this.editListener);
-            this.mainView.addFinishedListener(this.finishedListener);
         }
     }
 
