@@ -21,7 +21,7 @@ npm i
 npm start
 ```
 
-Im Browser unter http://localhost:3000 erreichbar.
+Im Browser unter http://localhost:3000/html erreichbar.
 
 
 Das UI wurde auf einem 4K Monitor entwickelt und konnte leider nicht

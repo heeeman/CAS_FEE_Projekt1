@@ -1,7 +1,6 @@
 const MAIN_PAGE = "main-template";
 const EDIT_PAGE = "edit-template";
 
-
 class Controller {
 
     constructor(pModel, pMainView, pEditView){
@@ -33,7 +32,6 @@ class Controller {
         this.editView.addCancelListener(() => this.setContent(MAIN_PAGE, this.model.getNotes()));
         this.editView.addSaveListener((form) => this.save(form));
     }
-
 
     setContent(htmlTemplate, context) {
         let source   = document.getElementById(htmlTemplate).innerHTML;
