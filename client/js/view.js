@@ -1,13 +1,21 @@
 class MainView {
 
     init () {
-        document.getElementsByTagName('select')[0].
-            addEventListener('input', this.changeStyle);
+        this.initStyleSeletor();
+        document.querySelector('select.style-sheet').addEventListener('input', this.changeStyle);
+    }
+
+    initStyleSeletor() {
+        let styleTag = document.querySelector('link.style-sheet');
+        let selector = document.querySelector('select.style-sheet');
+        selector.value = styleTag.dataset.selectedStyle;
     }
 
     changeStyle(event) {
         let filename = event.target.value;
-        document.getElementById('baseStyleSheet').href = '../css/' + filename + '.css';
+        let styleTag = document.querySelector('link.style-sheet')
+        styleTag.href = '../css/' + filename + '.css';
+        styleTag.dataset.selectedStyle = filename;
     }
 
 

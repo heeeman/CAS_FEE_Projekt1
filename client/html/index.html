@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link id="baseStyleSheet" rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/base.css" class="style-sheet" data-selected-style="base">
     <link rel="stylesheet" href="../css/index.css">
     <title>Note pro</title>
 </head>
@@ -21,7 +21,7 @@
                 <span class="flexSize1"></span>
                 <span class="flexSize1"></span>
                 <span class="flexSize1"></span>
-                <select class="flexSize1">
+                <select class="flexSize1 style-sheet">
                     <option value="base">Default-Style</option>
                     <option value="baseFrame">Frame-Style</option>
                 </select>
@@ -57,7 +57,7 @@
     <script id="edit-template" type="text/x-handlebars-template">
         <form>  <!-- only for validation -->
 
-            <!-- die name attrib könnten wieder raus, diese wurden nur für die version mit form submit benötigt-->
+            <!-- TODO die name attrib könnten wieder raus, diese wurden nur für die version mit form submit benötigt-->
 
             <input id="noteid" type="text"  value="{{id}}" hidden="true" >
             <article class="columnContainer">
