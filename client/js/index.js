@@ -9,5 +9,5 @@
         return new Date(dateString).toLocaleDateString();
     });
 
-    new Controller(new Notelist(), new MainView(), new EditView());
+    new Controller(noteRepo, new MainView(), new EditView());
 })();
