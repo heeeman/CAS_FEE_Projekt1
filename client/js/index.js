@@ -1,8 +1,5 @@
 
-
-// vielleicht noch ein window onload o.ä. einbauen
-
-(function initApplication() {
+window.onload = (function initApplication() {
 
     // registriert die notwendigen Helper im Handlebar
     Handlebars.registerHelper('dateConverter', function(dateString){
@@ -10,4 +7,4 @@
     });
 
     new Controller(noteRepo, new MainView(), new EditView());
-})();
+});
