@@ -15,6 +15,7 @@ class MainView {
         Handlebars.registerHelper('dateConverter', this.dateConverter);
         Handlebars.registerHelper('checkboxConverter', this.checkboxConverter);
         Handlebars.registerHelper('todayConverter', this.todayConverter);
+        Handlebars.registerHelper('priorityConverter', this.priorityConverter);
     }
 
     initStyleSeletor() {
@@ -82,6 +83,14 @@ class MainView {
         }
         return '';
     }
+
+    priorityConverter(prio) {
+        let result = '';
+        for(let i = 0 ; i < prio ; i++) {
+            result += '🗲';
+        }
+        return result;
+    }
 }
 
 class EditView {
@@ -92,7 +101,7 @@ class EditView {
 
     init(priority) {
 
-        this.setBolts(priority ? priority.length / 2 : 0);
+        this.setBolts(priority);
         document.querySelectorAll(".bolt").forEach((btn, index) =>{
             btn.addEventListener("click", (event) =>{
                 this.setBolts(index + 1);
@@ -127,8 +136,8 @@ class EditView {
 
     getPriority() {
         let bolts = document.querySelectorAll('.bolt');
-        let priority = "";
-        bolts.forEach(el => { if(el.classList.contains('checked')) priority += this.BOLT });
+        let priority = 0;
+        bolts.forEach(el => { if(el.classList.contains('checked')) priority++ });
         return priority;
     }
 

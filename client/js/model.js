@@ -6,8 +6,8 @@ var noteRepo = (function () {
         constructor() {
             this.LOCALSTORAGE_ID = "CAS_FEE_V1";
             this.notes = this.loadNotes();
-            // this.notes = this.getTestData();
-            // this.persistNotes();
+            this.notes = this.getTestData();
+            this.persistNotes();
         }
 
         getNotes() {
@@ -63,7 +63,7 @@ var noteRepo = (function () {
                     issueDate: new Date("2017-03-17").getTime(),
                     dueDate: "2017-10-17",
                     description: "This is my first post!",
-                    priority: "",
+                    priority: 0,
                     finished: "2017-05-06",
                     id: 1
                 },
@@ -73,7 +73,7 @@ var noteRepo = (function () {
                     dueDate: "2018-09-12",
                     description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
                     "und \n endlich die Rosen schneiden",
-                    priority: "🗲🗲🗲🗲🗲",
+                    priority: 5,
                     finished: "",
                     id: 2
                 },
@@ -83,7 +83,7 @@ var noteRepo = (function () {
                     dueDate: "2017-09-12",
                     description: "Für Fest einen Braten und etwas Feuerwasser." +
                     "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-                    priority: "🗲🗲🗲",
+                    priority: 3,
                     finished: "",
                     id: 3
                 }];
