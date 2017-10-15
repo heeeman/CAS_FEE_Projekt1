@@ -8,6 +8,8 @@ class Controller {
         this.mainView = pMainView;
         this.editView = pEditView;
         this.init();
+        // registriert die notwendigen Helper im Handlebar
+        Handlebars.registerHelper('dateConverter', this.dateConverter);
         // laden der Daten und rendern des main page
         this.setContent(MAIN_PAGE, this.model.getNotes());
     }
@@ -89,6 +91,24 @@ class Controller {
 
     getInt(s) {
         return parseInt(s.replace(/-/g, ''));
+    }
+
+    dateConverter(dateString) {
+
+        let dayInMs = 24 * 60 * 60 * 1000;
+        let today = new Date(new Date().toISOString().slice(0, 10));
+        let trans = new Date(dateString);
+
+        switch(trans.getTime()) {
+            case today.getTime():
+                return 'heute';
+            case (today.getTime() - dayInMs):
+                return 'gestern';
+            case (today.getTime() + dayInMs):
+                return 'morgen';
+            default:
+                return trans.toLocaleDateString();
+        }
     }
 
 }
