@@ -10,6 +10,13 @@ class MainView {
         document.querySelectorAll("input[type='checkbox']").forEach(e => e.addEventListener('click', this.finishedListener));
     }
 
+    initHandlebars() {
+        // registriert die notwendigen Helper im Handlebar
+        Handlebars.registerHelper('dateConverter', this.dateConverter);
+        Handlebars.registerHelper('checkboxConverter', this.checkboxConverter);
+        Handlebars.registerHelper('todayConverter', this.todayConverter);
+    }
+
     initStyleSeletor() {
         let styleTag = document.querySelector('link.style-sheet');
         let selector = document.querySelector('select.style-sheet');
@@ -22,7 +29,6 @@ class MainView {
         styleTag.href = '../css/' + filename + '.css';
         styleTag.dataset.selectedStyle = filename;
     }
-
 
     addCreateNoteListener(eventListener) {
         this.createNoteListener = eventListener;
@@ -42,6 +48,39 @@ class MainView {
 
     addFinishedListener(eventListener) {
         this.finishedListener = eventListener;
+    }
+
+    dateConverter(dateString) {
+
+        let dayInMs = 24 * 60 * 60 * 1000;
+        let today = new Date(getTodayString());
+        let trans = new Date(dateString);
+
+        switch(trans.getTime()) {
+            case today.getTime():
+                return 'heute';
+            case (today.getTime() - dayInMs):
+                return 'gestern';
+            case (today.getTime() + dayInMs):
+                return 'morgen';
+            default:
+                return trans.toLocaleDateString();
+        }
+    }
+
+    checkboxConverter(finishedDate) {
+        if(finishedDate != ''){
+            return 'checked';
+        }else {
+            return '';
+        }
+    }
+
+    todayConverter(finishedDate) {
+        if(getTodayString() == finishedDate) {
+            return ' [heute]';
+        }
+        return '';
     }
 }
 

@@ -8,10 +8,7 @@ class Controller {
         this.mainView = pMainView;
         this.editView = pEditView;
         this.init();
-        // registriert die notwendigen Helper im Handlebar
-        Handlebars.registerHelper('dateConverter', this.dateConverter.bind(this));
-        Handlebars.registerHelper('checkboxConverter', this.checkboxConverter);
-        Handlebars.registerHelper('todayConverter', this.todayConverter.bind(this));
+        this.mainView.initHandlebars();
         // laden der Daten und rendern des main page
         this.setContent(MAIN_PAGE, this.model.getNotes());
     }
@@ -52,8 +49,9 @@ class Controller {
 
     finishNote(event) {
         let note = this.model.loadNoteById(event.target.dataset.noteId);
-        note.finished = event.target.checked ? this.getTodayString() : "";
+        note.finished = event.target.checked ? getTodayString() : "";
         this.model.updateNote(note);
+        event.target.nextSibling.nodeValue = 'Finished' + this.mainView.todayConverter(note.finished);
     }
 
     editNote(event) {
@@ -93,42 +91,6 @@ class Controller {
 
     getInt(s) {
         return parseInt(s.replace(/-/g, ''));
-    }
-
-    dateConverter(dateString) {
-
-        let dayInMs = 24 * 60 * 60 * 1000;
-        let today = new Date(this.getTodayString());
-        let trans = new Date(dateString);
-
-        switch(trans.getTime()) {
-            case today.getTime():
-                return 'heute';
-            case (today.getTime() - dayInMs):
-                return 'gestern';
-            case (today.getTime() + dayInMs):
-                return 'morgen';
-            default:
-                return trans.toLocaleDateString();
-        }
-    }
-
-    checkboxConverter(finishedDate) {
-        if(finishedDate != ''){
-            return 'checked';
-        }else {
-            return '';
-        }
-    }
-
-    todayConverter(finishedDate) {
-        if(this.getTodayString() == finishedDate) {
-            return ' [heute]';
-        }
-    }
-
-    getTodayString() {
-        return new Date().toISOString().slice(0, 10);
     }
 
 }
