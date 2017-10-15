@@ -39,7 +39,7 @@
             <section class="flexSize1 columnContainer space">
                 <h3>{{#dateConverter dueDate}}{{/dateConverter}}</h3>
                 <div>
-                    <input type="checkbox" {{finished}} data-note-id="{{id}}">   Finish</input>
+                    <input type="checkbox" {{checkboxConverter finished}} data-note-id="{{id}}">Finished{{todayConverter finished}}</input>
                 </div>
             </section>
             <section class="flexSize3 columnContainer">

@@ -64,7 +64,7 @@ var noteRepo = (function () {
                     dueDate: "2017-10-17",
                     description: "This is my first post!",
                     priority: "",
-                    finished: "checked",
+                    finished: "2017-05-06",
                     id: 1
                 },
                 {

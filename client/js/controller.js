@@ -9,7 +9,9 @@ class Controller {
         this.editView = pEditView;
         this.init();
         // registriert die notwendigen Helper im Handlebar
-        Handlebars.registerHelper('dateConverter', this.dateConverter);
+        Handlebars.registerHelper('dateConverter', this.dateConverter.bind(this));
+        Handlebars.registerHelper('checkboxConverter', this.checkboxConverter);
+        Handlebars.registerHelper('todayConverter', this.todayConverter.bind(this));
         // laden der Daten und rendern des main page
         this.setContent(MAIN_PAGE, this.model.getNotes());
     }
@@ -22,7 +24,7 @@ class Controller {
         }
 
         this.filterActions = {
-            finished: (note) => note.finished == 'checked'
+            finished: (note) => note.finished != ''
         }
 
         this.mainView.addCreateNoteListener(() => this.setContent(EDIT_PAGE, {}));
@@ -50,7 +52,7 @@ class Controller {
 
     finishNote(event) {
         let note = this.model.loadNoteById(event.target.dataset.noteId);
-        note.finished = event.target.checked ? 'checked' : "";
+        note.finished = event.target.checked ? this.getTodayString() : "";
         this.model.updateNote(note);
     }
 
@@ -96,7 +98,7 @@ class Controller {
     dateConverter(dateString) {
 
         let dayInMs = 24 * 60 * 60 * 1000;
-        let today = new Date(new Date().toISOString().slice(0, 10));
+        let today = new Date(this.getTodayString());
         let trans = new Date(dateString);
 
         switch(trans.getTime()) {
@@ -109,6 +111,24 @@ class Controller {
             default:
                 return trans.toLocaleDateString();
         }
+    }
+
+    checkboxConverter(finishedDate) {
+        if(finishedDate != ''){
+            return 'checked';
+        }else {
+            return '';
+        }
+    }
+
+    todayConverter(finishedDate) {
+        if(this.getTodayString() == finishedDate) {
+            return ' [heute]';
+        }
+    }
+
+    getTodayString() {
+        return new Date().toISOString().slice(0, 10);
     }
 
 }
