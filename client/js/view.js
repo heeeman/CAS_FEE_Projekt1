@@ -6,7 +6,7 @@ class MainView {
         document.getElementById("createButton").addEventListener('click', this.createNoteListener);
         document.querySelectorAll(".js-sort").forEach(e => e.addEventListener('click', this.sortListener));
         document.querySelectorAll(".js-filter").forEach(e => e.addEventListener('click', this.filterListener));
-        document.querySelectorAll(".editbutton").forEach(e => e.addEventListener('click', this.editNoteListener));
+        document.querySelectorAll(".edit-button").forEach(e => e.addEventListener('click', this.editNoteListener));
         document.querySelectorAll("input[type='checkbox']").forEach(e => e.addEventListener('click', this.finishedListener));
     }
 
@@ -108,7 +108,7 @@ class EditView {
             });
         });
 
-        document.querySelector('.cancelButton').addEventListener('click', this.cancelListener);
+        document.querySelector('.cancel-button').addEventListener('click', this.cancelListener);
         // onsubmit muss gesetzt sein, ansonsten kann der browser ne Warning schmeissen
         document.querySelector('form').onsubmit = this.saveListener;
 
