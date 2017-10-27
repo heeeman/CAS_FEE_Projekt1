@@ -95,10 +95,6 @@ class MainView {
 
 class EditView {
 
-    constructor(){
-        this.BOLT = '🗲';
-    }
-
     init(priority) {
 
         this.setBolts(priority);
