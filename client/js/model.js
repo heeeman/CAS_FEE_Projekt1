@@ -6,8 +6,8 @@ var noteRepo = (function () {
         constructor() {
             this.LOCALSTORAGE_ID = "CAS_FEE_V1";
             this.notes = this.loadNotes();
-            this.notes = this.getTestData();
-            this.persistNotes();
+            // this.notes = this.getTestData();
+            // this.persistNotes();
         }
 
         getNotes() {

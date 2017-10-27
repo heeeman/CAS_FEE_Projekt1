@@ -11,6 +11,8 @@
   "license": "MIT",
   "homepage": "",
   "dependencies": {
+    "express": "^4.16.2",
+    "nedb": "^1.8.0",
     "serve": "^6.1.0"
   },
   "scripts": {
