@@ -15,13 +15,14 @@ var noteRepo = (function () {
         }
 
         addNewNote(note) {
-            note.id = this.getNewId();
+            delete note._id;  //Hack -> sonst vergibt die DB keine ID
             this.notes.push(note);
             this.persistNotes();
+            this.notes = this.loadNotes();  // sonst haben wir keine Id auf dem neu erstellten Obj
         }
 
         updateNote(note) {
-            let toUpdate = this.notes.find(no => no.id == note.id);
+            let toUpdate = this.notes.find(no => no._id == note._id);
             toUpdate.title = note.title;
             toUpdate.dueDate = note.dueDate;
             toUpdate.description = note.description;
@@ -29,18 +30,13 @@ var noteRepo = (function () {
             this.persistNotes();
         }
 
-        getNewId() {
-            let x = this.notes.reduce((a, b) => a.id > b.id ? a.id : b.id);
-            return x + 1;
-        }
-
         persistNotes() {
-            window.localStorage.setItem(this.LOCALSTORAGE_ID, JSON.stringify({notes: this.notes}));
+            connect.persistNotes(JSON.stringify({notes: this.notes}));
         }
 
         loadNoteById(id) {
             if (!id) return {};
-            let a= this.notes.filter(note => note.id == id);
+            let a= this.notes.filter(note => note._id == id);
             return a.length > 0 ? a[0] : {};
         }
 
@@ -50,9 +46,9 @@ var noteRepo = (function () {
          * @returns {{notes: [null,null,null]}}
          */
         loadNotes() {
-            var noteString = window.localStorage.getItem(this.LOCALSTORAGE_ID);
+            var noteString = connect.getAll();
             if (!noteString || noteString == 'undefined') return [];
-            return JSON.parse(noteString).notes;
+            return JSON.parse(noteString);
         }
 
 
@@ -64,8 +60,7 @@ var noteRepo = (function () {
                     dueDate: "2017-10-17",
                     description: "This is my first post!",
                     priority: 0,
-                    finished: "2017-05-06",
-                    id: 1
+                    finished: "2017-05-06"
                 },
                 {
                     title: "Rasen mähen",
@@ -74,8 +69,7 @@ var noteRepo = (function () {
                     description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
                     "und \n endlich die Rosen schneiden",
                     priority: 5,
-                    finished: "",
-                    id: 2
+                    finished: ""
                 },
                 {
                     title: "einkaufen",
@@ -84,8 +78,7 @@ var noteRepo = (function () {
                     description: "Für Fest einen Braten und etwas Feuerwasser." +
                     "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
                     priority: 3,
-                    finished: "",
-                    id: 3
+                    finished: ""
                 }];
             return notes;
         }

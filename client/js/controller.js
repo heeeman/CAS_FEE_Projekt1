@@ -76,10 +76,10 @@ class Controller {
             description: this.editView.getDescription(),
             priority: this.editView.getPriority(),
             finished: "",
-            id: this.editView.getNoteId()
+            _id: this.editView.getNoteId()
         }
 
-        if (note.id) {
+        if (note._id) {
             this.model.updateNote(note);
         }else {
             this.model.addNewNote(note);

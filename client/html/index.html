@@ -39,7 +39,7 @@
             <section class="flex-size1 column-container space">
                 <h3>{{#dateConverter dueDate}}{{/dateConverter}}</h3>
                 <div>
-                    <input type="checkbox" {{checkboxConverter finished}} data-note-id="{{id}}">Finished{{todayConverter finished}}</input>
+                    <input type="checkbox" {{checkboxConverter finished}} data-note-id="{{_id}}">Finished{{todayConverter finished}}</input>
                 </div>
             </section>
             <section class="flex-size3 column-container">
@@ -49,14 +49,14 @@
                 </div>
                 <textarea readonly>{{description}}</textarea>
             </section>
-            <button class="flex-size1 edit-button" data-note-id="{{id}}">Edit</button>
+            <button class="flex-size1 edit-button" data-note-id="{{_id}}">Edit</button>
         </article>
         {{/each}}
     </script>
 
     <script id="edit-template" type="text/x-handlebars-template">
         <form>  <!-- only for validation -->
-            <input id="noteid" type="text"  value="{{id}}" hidden="true" >
+            <input id="noteid" type="text"  value="{{_id}}" hidden="true" >
             <article class="column-container">
                 <div class="row-container">
                     <label for="title" class="flex-size1">Titel</label>
@@ -87,6 +87,7 @@
         </form>
     </script>
     <script src="../lib/handlebars-v4.0.10.js"></script>
+    <script src="../js/connection.js"></script>
     <script src="../js/model.js"></script>
     <script src="../js/view.js"></script>
     <script src="../js/controller.js"></script>

@@ -1,22 +1,25 @@
 const store = require("../services/notesStore.js");
 
-module.exports.getNotes = function(req, res)
+module.exports.getNotes = function(req, res, next)
 {
     store.all(function (err, orders) {
+
+        if(err && next) {
+            next(err);
+        }
         res.json(orders || {});
     })
 };
 
-module.exports.persistNotes = function(req, res)
+module.exports.persistNotes = function(req, res, next)
 {
-    req.body.forEach(note => store.update(note, (err, n) => {
-        if(err) {
-            console.log('ging wohl in die Hose err: ', err);
-            console.log('ging wohl in die Hose note: ', note);
-        }else {
-            console.log('Es gibt viele Updates : ', n);
+    req.body.notes.forEach(note => store.update(note, (err, n) => {
+        if(err && next) {
+            next(err)
         }
     }))
+
+    res.end();
 };
 
 // module.exports.createNote = function(req, res)

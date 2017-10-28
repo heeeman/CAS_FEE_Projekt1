@@ -1,14 +1,6 @@
 const Datastore = require('nedb');
 const db = new Datastore({ filename: './data/notes.db', autoload: true });
 
-// function Order(pizzaName, orderedBy)
-// {
-//     this.orderedBy = orderedBy;
-//     this.pizzaName = pizzaName;
-//     this.orderDate = new Date();
-//     this.state = "OK";
-// }
-
 
 function publicAddNote(note, callback)
 {
