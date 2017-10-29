@@ -22,16 +22,29 @@ module.exports.persistNotes = function(req, res, next)
     res.end();
 };
 
-// module.exports.createNote = function(req, res)
-// {
-//     let order = store.add(req.body.name, util.current(req), function(err, order) {
-//         res.json(order);
-//     });
-// };
-//
+module.exports.updateNote = function(req, res)
+{
+    let order = store.update(req.body, (err, n) => {
+        if(err && next) {
+            next(err)
+        }
+    })
+    res.end();
+};
+
+module.exports.createNote = function(req, res, next)
+{
+    let order = store.insert(req.body, (err, note) => {
+        if(err && next) {
+            next(err)
+        }
+        res.json(note);
+    })
+};
+
 // module.exports.getNote = function(req, res){
-//     store.get(req.params.id, util.current(req), function(err, order) {
-//         res.json(order);
+//     store.get(req.params.id, function(err, note) {
+//         res.json(note);
 //     });
 // };
 

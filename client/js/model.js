@@ -5,6 +5,7 @@ var noteRepo = (function () {
 
         constructor() {
             this.LOCALSTORAGE_ID = "CAS_FEE_V1";
+            this.refresher = null;
             this.notes = this.loadNotes();
             // this.notes = this.getTestData();
             // this.persistNotes();
@@ -16,9 +17,11 @@ var noteRepo = (function () {
 
         addNewNote(note) {
             delete note._id;  //Hack -> sonst vergibt die DB keine ID
-            this.notes.push(note);
-            this.persistNotes();
-            this.notes = this.loadNotes();  // sonst haben wir keine Id auf dem neu erstellten Obj
+            connect.createNote(JSON.stringify(note), res => {
+                let created = JSON.parse(res);
+                this.notes.push(created);
+                this.callRefresh(this.notes, created);
+            });
         }
 
         updateNote(note) {
@@ -27,11 +30,7 @@ var noteRepo = (function () {
             toUpdate.dueDate = note.dueDate;
             toUpdate.description = note.description;
             toUpdate.priority = note.priority;
-            this.persistNotes();
-        }
-
-        persistNotes() {
-            connect.persistNotes(JSON.stringify({notes: this.notes}));
+            connect.updateNote(JSON.stringify(toUpdate));
         }
 
         loadNoteById(id) {
@@ -46,11 +45,23 @@ var noteRepo = (function () {
          * @returns {{notes: [null,null,null]}}
          */
         loadNotes() {
-            var noteString = connect.getAll();
-            if (!noteString || noteString == 'undefined') return [];
-            return JSON.parse(noteString);
+            connect.getAll( notes => {
+                this.notes = (!notes || notes == 'undefined') ? [] :  JSON.parse(notes);
+                this.callRefresh(this.notes, null);
+            })
+            return this.notes;
         }
 
+        callRefresh(list, note) {
+            if(this.refresher) {
+                this.refresher(list, note);
+            }
+        }
+
+        /*TODO zur Erstellung von Testdaten -> auf den Server schieben*/
+        persistNotes() {
+            connect.persistNotes(JSON.stringify({notes: this.notes}));
+        }
 
         getTestData() {
             let notes = [
@@ -102,9 +113,14 @@ var noteRepo = (function () {
         return nodeList.loadNoteById(id);
     }
 
+    function setRefresh(refresher) {
+        nodeList.refresher = refresher;
+    }
+
     return {    getNotes: getAllNotes,
                 addNewNote: addNote,
                 updateNote: updateNote,
-                loadNoteById: loadNote
+                loadNoteById: loadNote,
+                setRefresher: setRefresh
     };
 })();

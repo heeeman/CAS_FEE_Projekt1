@@ -12,13 +12,19 @@ function publicAddNote(note, callback)
 }
 
 /**
- * updated eine note, wird keine gefunden, so wird einen neuer erstellt -> upsert: true
+ * updated eine note,
  * @param note
  * @param callback
  */
 function publicUpdateNote(note, callback) {
-    db.update({_id: note._id}, note, {upsert: true}, function (err, numReplaced) {
+    db.update({_id: note._id}, note, {upsert: false}, function (err, numReplaced) {
         callback(err, numReplaced);
+    });
+}
+
+function publicInsertNote(note, callback) {
+    db.insert(note, function (err, note) {
+        callback(err, note);
     });
 }
 
@@ -36,4 +42,4 @@ function publicAllNotes(callback)
     });
 }
 
-module.exports = {add : publicAddNote, update : publicUpdateNote, /*get : publicGet,*/ all : publicAllNotes};
+module.exports = {add : publicAddNote, update : publicUpdateNote, insert : publicInsertNote, /*get : publicGet,*/ all : publicAllNotes};

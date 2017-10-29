@@ -4,8 +4,9 @@ const notes = require('../controller/notesController.js');
 
 router.get("/", notes.getNotes);
 router.post("/all/", notes.persistNotes);
-// router.post("/", orders.createNote);
-// router.get("/:id/", orders.getNote);
+router.post("/", notes.createNote);
+router.put("/", notes.updateNote);
+// router.get("/:id/", notes.getNote);
 
 
 module.exports = router;
