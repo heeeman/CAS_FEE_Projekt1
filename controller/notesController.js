@@ -1,4 +1,5 @@
 const store = require("../services/notesStore.js");
+const io = require('../services/pushClient');
 
 module.exports.getNotes = function(req, res, next)
 {
@@ -18,7 +19,6 @@ module.exports.persistNotes = function(req, res, next)
             next(err)
         }
     }))
-
     res.end();
 };
 
@@ -28,6 +28,7 @@ module.exports.updateNote = function(req, res)
         if(err && next) {
             next(err)
         }
+        io.notifyClient(req.body._id);
     })
     res.end();
 };
@@ -39,6 +40,7 @@ module.exports.createNote = function(req, res, next)
             next(err)
         }
         res.json(note);
+        io.notifyClient();  // ganze liste erneuern
     })
 };
 

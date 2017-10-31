@@ -13,8 +13,9 @@
  */
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const app = express();
+var http = require('http').Server(app);
+require('./services/pushClient.js').init(http);
 
 app.use(myDummyLogger());
 
@@ -30,7 +31,7 @@ app.use("/notes", require('./routes/noteRoutes.js'));
 
 const hostname = '127.0.0.1';
 const port = 3000;
-app.listen(port, hostname, () => {  console.log(`Server running at http://${hostname}:${port}/`); });
+http.listen(port, hostname, () => {  console.log(`Server running at http://${hostname}:${port}/`); });
 
 function myDummyLogger( options ){
     options = options ? options : {};

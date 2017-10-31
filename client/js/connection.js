@@ -1,5 +1,7 @@
 var connect = (function () {
 
+    var pusher;
+
     const urlRoot = location.origin + '/notes/';
 
     function loadAll(callBack) {
@@ -84,10 +86,28 @@ var connect = (function () {
         // xhr.send(content);
     }
 
+    /*******Socket*******************/
+
+    var socket = io();
+
+    socket.on('NoteList', function(msg){
+        console.log('Socket refres Note: ', msg);
+        if(pusher) { pusher(msg);}
+    });
+
+    function setPusher(methode) {
+        pusher = methode;
+    }
+
+
+    /*******Socket*******************/
+
+
     return {getAll: loadAll,
             persistNotes: saveAll,
             createNote: postNote,
-            updateNote: putNote
+            updateNote: putNote,
+            setServerListener: setPusher
     };
 
 })();

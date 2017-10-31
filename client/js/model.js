@@ -6,6 +6,7 @@ var noteRepo = (function () {
         constructor() {
             this.LOCALSTORAGE_ID = "CAS_FEE_V1";
             this.refresher = null;
+            connect.setServerListener(this.serverPush.bind(this));
             this.notes = this.loadNotes();
             // this.notes = this.getTestData();
             // this.persistNotes();
@@ -92,6 +93,18 @@ var noteRepo = (function () {
                     finished: ""
                 }];
             return notes;
+        }
+
+        serverPush(noteId) {
+            connect.getAll( notes => {
+                this.notes = (!notes || notes == 'undefined') ? [] :  JSON.parse(notes);
+                let note = null;
+                if(noteId) {
+                    let n = this.loadNoteById(noteId);
+                    if(n._id) note = n;
+                }
+                this.callRefresh(this.notes, note);
+            })
         }
     }
 
