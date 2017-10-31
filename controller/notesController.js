@@ -45,3 +45,17 @@ module.exports.createNote = function(req, res, next)
 };
 
 
+module.exports.killAndCreate = function(req, res, next)
+{
+
+    store.kill();
+
+    let order = store.insert(req.body, (err, note) => {
+        if(err && next) {
+            next(err)
+        }
+        res.json(note);
+        io.notifyClient();  // ganze liste erneuern
+    })
+};
+

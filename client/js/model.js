@@ -4,12 +4,9 @@ var noteRepo = (function () {
     class Notelist {
 
         constructor() {
-            this.LOCALSTORAGE_ID = "CAS_FEE_V1";
             this.refresher = null;
             connect.setServerListener(this.serverPush.bind(this));
             this.notes = this.loadNotes();
-            // this.notes = this.getTestData();
-            // this.persistNotes();
         }
 
         getNotes() {
@@ -57,42 +54,6 @@ var noteRepo = (function () {
             if(this.refresher) {
                 this.refresher(list, note);
             }
-        }
-
-        /*TODO zur Erstellung von Testdaten -> auf den Server schieben*/
-        persistNotes() {
-            connect.persistNotes(JSON.stringify({notes: this.notes}));
-        }
-
-        getTestData() {
-            let notes = [
-                {
-                    title: "My New Post",
-                    issueDate: new Date("2017-03-17").getTime(),
-                    dueDate: "2017-10-17",
-                    description: "This is my first post!",
-                    priority: 0,
-                    finished: "2017-05-06"
-                },
-                {
-                    title: "Rasen mähen",
-                    issueDate: new Date("2017-01-12").getTime(),
-                    dueDate: "2018-09-12",
-                    description: "Unbedingt alle Flächen. Die Randsteine nicht vergessen." +
-                    "und \n endlich die Rosen schneiden",
-                    priority: 5,
-                    finished: ""
-                },
-                {
-                    title: "einkaufen",
-                    issueDate: new Date("2017-02-12").getTime(),
-                    dueDate: "2017-09-12",
-                    description: "Für Fest einen Braten und etwas Feuerwasser." +
-                    "Zum Dessert wäre es noch lässig etwas Käse, ach was Eis und ..... wer weiss dass schon so genau. es muss jedenfall genug her",
-                    priority: 3,
-                    finished: ""
-                }];
-            return notes;
         }
 
         serverPush(noteId) {

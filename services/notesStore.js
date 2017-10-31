@@ -42,4 +42,4 @@ function publicAllNotes(callback)
     });
 }
 
-module.exports = {add : publicAddNote, update : publicUpdateNote, insert : publicInsertNote, /*get : publicGet,*/ all : publicAllNotes};
+module.exports = {add : publicAddNote, update : publicUpdateNote, insert : publicInsertNote, all : publicAllNotes};

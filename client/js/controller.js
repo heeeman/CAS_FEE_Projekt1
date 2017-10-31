@@ -117,9 +117,9 @@ class Status {
     }
 
     getFilter(type) {
-        this.maintPage.filter = this.filterActions[type];
+        this.mainPage.filter = this.filterActions[type];
         this.mainPage.sorter = null;
-        return this.maintPage.filter;
+        return this.mainPage.filter;
     }
 
     getSorter(type) {

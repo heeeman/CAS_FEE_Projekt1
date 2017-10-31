@@ -15,21 +15,6 @@ var connect = (function () {
         }).then(json => {callBack(json);});
     }
 
-    /**synchrone Verbindung**/
-    function saveAll(content) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (4 === xhr.readyState) {
-                if (xhr.status !== 200) {
-                    alert('There was a problem with the request. status = ' + xhr.status);
-                }
-            }
-        };
-        xhr.open('POST', urlRoot + 'all', false); //sync
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.send(content);
-    }
-
     function putNote(content) {
 
         fetch(urlRoot, {
@@ -86,8 +71,7 @@ var connect = (function () {
         // xhr.send(content);
     }
 
-    /*******Socket*******************/
-
+    /*******Socket Server Push*******************/
     var socket = io();
 
     socket.on('NoteList', function(msg){
@@ -98,13 +82,9 @@ var connect = (function () {
     function setPusher(methode) {
         pusher = methode;
     }
-
-
     /*******Socket*******************/
 
-
     return {getAll: loadAll,
-            persistNotes: saveAll,
             createNote: postNote,
             updateNote: putNote,
             setServerListener: setPusher
