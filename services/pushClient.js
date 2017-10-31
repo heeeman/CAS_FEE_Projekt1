@@ -9,6 +9,5 @@ module.exports.init = function (http) {
 }
 
 module.exports.notifyClient = function(noteId) {
-    console.log('notify Client id: ', noteId);
     io.emit('NoteList', noteId);
 }

@@ -44,10 +44,4 @@ module.exports.createNote = function(req, res, next)
     })
 };
 
-// module.exports.getNote = function(req, res){
-//     store.get(req.params.id, function(err, note) {
-//         res.json(note);
-//     });
-// };
-
 
