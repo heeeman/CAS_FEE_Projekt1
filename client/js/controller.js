@@ -27,17 +27,12 @@ class Controller {
     }
 
     setContent(htmlTemplate, context) {
-        let source   = document.getElementById(htmlTemplate).innerHTML;
-        let template = Handlebars.compile(source);
-        let html    = template(context);
-        document.getElementById("entryPoint").innerHTML = html;
-
         this.status.page = htmlTemplate;
         if(EDIT_PAGE == htmlTemplate) {
-            this.editView.init(context.priority);
+            this.editView.init(htmlTemplate, context);
             this.status.editPage.id = context._id;
         }else {
-            this.mainView.init();
+            this.mainView.init(htmlTemplate, context);
         }
     }
 

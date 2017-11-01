@@ -1,6 +1,17 @@
-class MainView {
+class AbstractView {
+    initContent(htmlTemplate, context){
 
-    init () {
+        let source   = document.getElementById(htmlTemplate).innerHTML;
+        let template = Handlebars.compile(source);
+        let html    = template(context);
+        document.getElementById("entryPoint").innerHTML = html;
+    }
+}
+
+class MainView extends AbstractView{
+
+    init (template, context) {
+        super.initContent(template, context)
         this.initStyleSeletor();
         document.querySelector('select.style-sheet').addEventListener('input', this.changeStyle);
         document.getElementById("createButton").addEventListener('click', this.createNoteListener);
@@ -93,11 +104,12 @@ class MainView {
     }
 }
 
-class EditView {
+class EditView extends AbstractView{
 
-    init(priority) {
+    init (template, context) {
+        super.initContent(template, context)
 
-        this.setPriority(priority);
+        this.setPriority(context.priority);
         document.querySelectorAll(".priority").forEach((btn, index) =>{
             btn.addEventListener("click", (event) =>{
                 this.setPriority(index + 1);
