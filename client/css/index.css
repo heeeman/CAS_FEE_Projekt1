@@ -1,8 +1,5 @@
-/** {*/
-    /*margin: 0.3em;*/
-/*}*/
-
-button, select, span {
+button, select, span, body, footer,
+section, article, div, h3, h2{
     margin: 0;
     padding: 0;
 }
@@ -20,17 +17,15 @@ button, select, span {
 }
 
 .separate {
-    margin: 0.3em;
+    margin: 0.4em;
+    padding: 0.2em
 }
 
-.header {
-    margin-right: 0.6em;
-    padding-right: 0.9em;
+.main-row {
+    padding: 0.5em;
+    margin: 0.5em;
+    flex: 1 100%;
 }
-
-/*button, select, span{*/
-    /*padding: 0.2em;*/
-/*}*/
 
 .flex-size1 {
     flex: 1 0 0%;
@@ -45,7 +40,7 @@ button, select, span {
 }
 
 .edit-button {
-    margin: 2em 1em 0em;
+    margin: 2em 0.5em 0.5em 2em;
 }
 
 .space {
@@ -60,7 +55,7 @@ button, select, span {
     flex: 1 100%;
 }
 
-.bolt {
+.priority {
     font-size: 1.5em;
     margin: 0px;
     padding: 0px;
@@ -70,7 +65,7 @@ button, select, span {
     width: 5%;
 }
 
-.bolt.checked {
+.priority.checked {
     color: black;
 }
 

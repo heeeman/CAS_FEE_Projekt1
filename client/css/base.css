@@ -1,12 +1,5 @@
 body {
-    margin: 0 auto;
     flex-flow: row wrap;
-}
-
-header, footer, article{
-    padding: 10px;
-    margin: 10px;
-    flex: 1 100%;
 }
 
 footer {

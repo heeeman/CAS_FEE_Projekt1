@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/base.css" class="style-sheet" data-selected-style="base">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/base.css" class="style-sheet" data-selected-style="base">
     <title>Note pro</title>
 </head>
 <body class="row-container">
-
+    <div class="separate"></div>
     <div id="entryPoint">
     </div>
 
     <!-- order id, for, name, type, class, value, handler-->
 
     <script id="main-template" type="text/x-handlebars-template">
-        <header class="header">
+        <header class="main-row">
             <div class="row-container between">
                 <Button id="createButton" class="flex-size1 separate">Create new Note</Button>
                 <span class="flex-size1 separate"></span>
                 <span class="flex-size1 separate"></span>
                 <span class="flex-size1 separate"></span>
-                <select class="flex-size1 style-sheet separate">
+                <select class="flex-size1 style-sheet separate in-field">
                     <option value="base">Default-Style</option>
                     <option value="baseFrame">Frame-Style</option>
                 </select>
@@ -35,54 +35,54 @@
             </div>
         </header>
         {{#each this}} <!-- speziale damit ich direkt ein array übergeben kann und dieses nicht in ein Obj packen muss-->
-        <article class="row-container">
+        <article class="row-container main-row">
             <section class="flex-size1 column-container space">
-                <h3>{{#dateConverter dueDate}}{{/dateConverter}}</h3>
+                <h3 class="separate">{{#dateConverter dueDate}}{{/dateConverter}}</h3>
                 <div>
-                    <input type="checkbox" {{checkboxConverter finished}} data-note-id="{{_id}}">Finished{{todayConverter finished}}</input>
+                    <input class="separate" type="checkbox" {{checkboxConverter finished}} data-note-id="{{_id}}">Finished{{todayConverter finished}}</input>
                 </div>
             </section>
             <section class="flex-size3 column-container">
-                <div class="row-container">
+                <div class="row-container separate">
                     <h2 class="flex-size1">{{title}}</h2>
-                    <h2>{{priorityConverter priority}}</h2>
+                    <h2 >{{priorityConverter priority}}</h2>
                 </div>
-                <textarea readonly>{{description}}</textarea>
+                <textarea class="separate in-field" readonly>{{description}}</textarea>
             </section>
-            <button class="flex-size1 edit-button" data-note-id="{{_id}}">Edit</button>
+            <button class="flex-size1 edit-button separate" data-note-id="{{_id}}">Edit</button>
         </article>
         {{/each}}
     </script>
 
     <script id="edit-template" type="text/x-handlebars-template">
-        <form>  <!-- only for validation -->
+        <form class="main-row">  <!-- only for validation -->
             <input id="noteid" type="text"  value="{{_id}}" hidden="true" >
             <article class="column-container">
                 <div class="row-container">
-                    <label for="title" class="flex-size1">Titel</label>
-                    <input id="title" type="text" class="edit-in flex-size3" value="{{title}}" maxlength="70" placeholder="schöner Titel" required>
+                    <label for="title" class="flex-size1 separate">Titel</label>
+                    <input id="title" type="text" class="edit-in flex-size3 separate in-field" value="{{title}}" maxlength="70" placeholder="schöner Titel" required>
                 </div>
                 <div class="row-container">
-                    <label for="description" class="flex-size1">Beschreibung</label>
-                    <textarea id="description" class="edit-in flex-size3 height10" maxlength="2000" placeholder="Was will ich machen...">{{description}}</textarea>
+                    <label for="description" class="flex-size1 separate">Beschreibung</label>
+                    <textarea id="description" class="edit-in flex-size3 height10 separate in-field" maxlength="2000" placeholder="Was will ich machen...">{{description}}</textarea>
                 </div>
                 <div class="row-container">
-                    <label class="flex-size1">Wichtigkeit</label>
-                    <span class="edit-in flex-size3">
-                        <button type="button" class="bolt">🗲</button>
-                        <button type="button" class="bolt">🗲</button>
-                        <button type="button" class="bolt">🗲</button>
-                        <button type="button" class="bolt">🗲</button>
-                        <button type="button" class="bolt">🗲</button>
+                    <label class="flex-size1 separate">Wichtigkeit</label>
+                    <span class="edit-in flex-size3 separate">
+                        <button type="button" class="priority">🗲</button>
+                        <button type="button" class="priority">🗲</button>
+                        <button type="button" class="priority">🗲</button>
+                        <button type="button" class="priority">🗲</button>
+                        <button type="button" class="priority">🗲</button>
                     </span>
                 </div>
                 <div class="row-container">
-                    <label for="endTime" class="flex-size1">Erledigt bis:</label>
-                    <input id="endTime" type="date" class="edit-in flex-size1" value="{{dueDate}}" maxlength="10" required>
+                    <label for="endTime" class="flex-size1 separate">Erledigt bis:</label>
+                    <input id="endTime" type="date" class="edit-in flex-size1 separate in-field" value="{{dueDate}}" maxlength="10" required>
                     <div class="flex-size2"></div>
                 </div>
-                <button type="submit" class="saveButton">Speichern</button>
-                <button type="button" class="cancel-button">Cancel</button>
+                <button type="submit" class="saveButton separate">Speichern</button>
+                <button type="button" class="cancel-button separate">Cancel</button>
             </article>
         </form>
     </script>
@@ -94,7 +94,7 @@
     <script src="../js/view.js"></script>
     <script src="../js/controller.js"></script>
     <script src="../js/index.js"></script>
-    <footer>
+    <footer class="main-row">
         <p>© 2017 by Heeeman</p>
     </footer>
 </body>

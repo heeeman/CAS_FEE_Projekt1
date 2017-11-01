@@ -97,10 +97,10 @@ class EditView {
 
     init(priority) {
 
-        this.setBolts(priority);
-        document.querySelectorAll(".bolt").forEach((btn, index) =>{
+        this.setPriority(priority);
+        document.querySelectorAll(".priority").forEach((btn, index) =>{
             btn.addEventListener("click", (event) =>{
-                this.setBolts(index + 1);
+                this.setPriority(index + 1);
             });
         });
 
@@ -131,9 +131,9 @@ class EditView {
     }
 
     getPriority() {
-        let bolts = document.querySelectorAll('.bolt');
+        let prioritySigns = document.querySelectorAll('.priority');
         let priority = 0;
-        bolts.forEach(el => { if(el.classList.contains('checked')) priority++ });
+        prioritySigns.forEach(el => { if(el.classList.contains('checked')) priority++ });
         return priority;
     }
 
@@ -141,8 +141,8 @@ class EditView {
         return noteid.value;
     }
 
-    setBolts(clickIndex) {
-        document.querySelectorAll(".bolt").forEach((b, i) => {
+    setPriority(clickIndex) {
+        document.querySelectorAll(".priority").forEach((b, i) => {
             if ( i < clickIndex) {
                 b.classList.add('checked');
             }else {

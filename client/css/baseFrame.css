@@ -4,21 +4,19 @@ body {
     flex-flow: row wrap;
 }
 
-header, footer, article{
+.main-row{
     border-radius: 0px 0.5em 0.5em;
     border: 1px solid;
-    padding: 10px;
-    margin: 10px;
-    flex: 1 100%;
     background-color: lightgreen;
 }
 
-footer {
-    height: 2em;
-    margin: -0.3em 0.9em 0.3em;
+footer.main-row {
+    padding: 0.5em;
+    margin: 0em 0.5em;
 }
 
-footer, Header, select {
+footer.main-row, Header.main-row,
+.in-field {
     background-color: lemonchiffon;
 }
 
