@@ -10,10 +10,19 @@ class AbstractView {
 
 class MainView extends AbstractView{
 
+    constructor() {
+        super();
+        this.STYLE = "NOTE-APP-STYLE";
+        let lastStyle = localStorage.getItem(this.STYLE);
+        if(lastStyle) {
+            this.setStyle(lastStyle);
+        }
+    }
+
     init (template, context) {
         super.initContent(template, context)
         this.initStyleSeletor();
-        document.querySelector('select.style-sheet').addEventListener('input', this.changeStyle);
+        document.querySelector('select.style-sheet').addEventListener('input', this.changeStyle.bind(this));
         document.getElementById("createButton").addEventListener('click', this.createNoteListener);
         document.querySelectorAll(".js-sort").forEach(e => e.addEventListener('click', this.sortListener));
         document.querySelectorAll(".js-filter").forEach(e => e.addEventListener('click', this.filterListener));
@@ -36,7 +45,11 @@ class MainView extends AbstractView{
     }
 
     changeStyle(event) {
-        let filename = event.target.value;
+        this.setStyle(event.target.value);
+        localStorage.setItem(this.STYLE, event.target.value);
+    }
+
+    setStyle(filename) {
         let styleTag = document.querySelector('link.style-sheet')
         styleTag.href = '../css/' + filename + '.css';
         styleTag.dataset.selectedStyle = filename;
