@@ -9,11 +9,11 @@ class AbstractView {
 }
 
 class MainView extends AbstractView{
-
+    static get STYLE() { return 'NOTE-APP-STYLE'; }
     constructor() {
         super();
         this.STYLE = "NOTE-APP-STYLE";
-        let lastStyle = localStorage.getItem(this.STYLE);
+        let lastStyle = localStorage.getItem(MainView.STYLE);
         if(lastStyle) {
             this.setStyle(lastStyle);
         }
@@ -46,7 +46,7 @@ class MainView extends AbstractView{
 
     changeStyle(event) {
         this.setStyle(event.target.value);
-        localStorage.setItem(this.STYLE, event.target.value);
+        localStorage.setItem(MainView.STYLE, event.target.value);
     }
 
     setStyle(filename) {
