@@ -4,7 +4,7 @@ body {
     flex-flow: row wrap;
 }
 
-.main-row{
+.main-row {
     border-radius: 0px 0.5em 0.5em;
     border: 1px solid;
     background-color: lightgreen;

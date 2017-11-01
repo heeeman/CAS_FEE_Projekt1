@@ -3,7 +3,7 @@ const EDIT_PAGE = "edit-template";
 
 class Controller {
 
-    constructor(pModel, pMainView, pEditView){
+    constructor(pModel, pMainView, pEditView) {
         this.status = new Status();
         this.model = pModel;
         this.model.setRefresher(this.refresh.bind(this));
@@ -28,10 +28,10 @@ class Controller {
 
     setContent(htmlTemplate, context) {
         this.status.page = htmlTemplate;
-        if(EDIT_PAGE == htmlTemplate) {
+        if (EDIT_PAGE == htmlTemplate) {
             this.editView.init(htmlTemplate, context);
             this.status.editPage.id = context._id;
-        }else {
+        } else {
             this.mainView.init(htmlTemplate, context);
         }
     }
@@ -47,18 +47,18 @@ class Controller {
         this.setContent(EDIT_PAGE, this.model.loadNoteById(event.target.dataset.noteId));
     }
 
-    sort(event){
+    sort(event) {
         let newOrder = this.model.getNotes().sort(this.status.getSorter(event.currentTarget.dataset.sortType));
         this.setContent(MAIN_PAGE, newOrder);
     }
 
-    filter(event){
+    filter(event) {
         let newOrder = this.model.getNotes().filter(this.status.getFilter(event.currentTarget.dataset.filterType));
         this.setContent(MAIN_PAGE, newOrder);
     }
 
     save(form) {
-        let note =             {
+        let note = {
             title: this.editView.getTitle(),
             issueDate: new Date().getTime(),
             dueDate: this.editView.getEndtime(),
@@ -70,7 +70,7 @@ class Controller {
 
         if (note._id) {
             this.model.updateNote(note);
-        }else {
+        } else {
             this.model.addNewNote(note);
         }
 
@@ -88,7 +88,7 @@ class Controller {
                 this.status.checkMainPage(list, (viewList) => this.setContent(MAIN_PAGE, viewList));
                 break;
             case EDIT_PAGE:
-                this.status.checkEditPage(note , _ => this.setContent(EDIT_PAGE, note))
+                this.status.checkEditPage(note, _ => this.setContent(EDIT_PAGE, note))
                 break;
         }
     }
@@ -97,14 +97,14 @@ class Controller {
 
 class Status {
 
-    constructor(){
+    constructor() {
         this.page;
         this.mainPage = {};
         this.editPage = {};
         this.sortActions = {
             finishdate: (a, b) => this.getInt(b.dueDate) - this.getInt(a.dueDate),
-            issuedate : (a, b) => b.issueDate - a.issueDate,
-            priority : (a, b) => b.priority - a.priority
+            issuedate: (a, b) => b.issueDate - a.issueDate,
+            priority: (a, b) => b.priority - a.priority
         }
         this.filterActions = {
             finished: (note) => note.finished != ''
@@ -128,7 +128,7 @@ class Status {
     }
 
     checkMainPage(list, refresh) {
-        if (list){
+        if (list) {
             let result = this.filter(list);
             result = this.sort(result);
             refresh(result);
@@ -136,14 +136,14 @@ class Status {
     }
 
     filter(list) {
-        if(this.mainPage.filter){
+        if (this.mainPage.filter) {
             return list.filter(this.mainPage.filter);
         }
         return list;
     }
 
     sort(list) {
-        if(this.mainPage.sorter){
+        if (this.mainPage.sorter) {
             return list.sort(this.mainPage.sorter);
         }
         return list;
@@ -152,8 +152,4 @@ class Status {
     getInt(s) {
         return parseInt(s.replace(/-/g, ''));
     }
-
-
-
-
 }

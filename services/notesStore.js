@@ -1,11 +1,10 @@
 const Datastore = require('nedb');
-const db = new Datastore({ filename: './data/notes.db', autoload: true });
+const db = new Datastore({filename: './data/notes.db', autoload: true});
 
 
-function publicAddNote(note, callback)
-{
-    db.insert(note, function(err, newDoc){
-        if(callback){
+function publicAddNote(note, callback) {
+    db.insert(note, function (err, newDoc) {
+        if (callback) {
             callback(err, newDoc);
         }
     });
@@ -28,18 +27,16 @@ function publicInsertNote(note, callback) {
     });
 }
 
-function publicGet(id, currentUser, callback)
-{
-    db.findOne({ _id: id}, function (err, doc) {
-        callback( err, doc);
+function publicGet(id, currentUser, callback) {
+    db.findOne({_id: id}, function (err, doc) {
+        callback(err, doc);
     });
 }
 
-function publicAllNotes(callback)
-{
+function publicAllNotes(callback) {
     db.find({}, function (err, docs) {
-        callback( err, docs);
+        callback(err, docs);
     });
 }
 
-module.exports = {add : publicAddNote, update : publicUpdateNote, insert : publicInsertNote, all : publicAllNotes};
+module.exports = {add: publicAddNote, update: publicUpdateNote, insert: publicInsertNote, all: publicAllNotes};

@@ -1,25 +1,28 @@
 class AbstractView {
-    initContent(htmlTemplate, context){
+    initContent(htmlTemplate, context) {
 
-        let source   = document.getElementById(htmlTemplate).innerHTML;
+        let source = document.getElementById(htmlTemplate).innerHTML;
         let template = Handlebars.compile(source);
-        let html    = template(context);
+        let html = template(context);
         document.getElementById("entryPoint").innerHTML = html;
     }
 }
 
-class MainView extends AbstractView{
-    static get STYLE() { return 'NOTE-APP-STYLE'; }
+class MainView extends AbstractView {
+    static get STYLE() {
+        return 'NOTE-APP-STYLE';
+    }
+
     constructor() {
         super();
         this.STYLE = "NOTE-APP-STYLE";
         let lastStyle = localStorage.getItem(MainView.STYLE);
-        if(lastStyle) {
+        if (lastStyle) {
             this.setStyle(lastStyle);
         }
     }
 
-    init (template, context) {
+    init(template, context) {
         super.initContent(template, context)
         this.initStyleSeletor();
         document.querySelector('select.style-sheet').addEventListener('input', this.changeStyle.bind(this));
@@ -59,11 +62,11 @@ class MainView extends AbstractView{
         this.createNoteListener = eventListener;
     }
 
-    addSorter(eventListener){
+    addSorter(eventListener) {
         this.sortListener = eventListener;
     }
 
-    addFilter(eventListener){
+    addFilter(eventListener) {
         this.filterListener = eventListener;
     }
 
@@ -81,7 +84,7 @@ class MainView extends AbstractView{
         let today = new Date(getTodayString());
         let trans = new Date(dateString);
 
-        switch(trans.getTime()) {
+        switch (trans.getTime()) {
             case today.getTime():
                 return 'heute';
             case (today.getTime() - dayInMs):
@@ -94,15 +97,15 @@ class MainView extends AbstractView{
     }
 
     checkboxConverter(finishedDate) {
-        if(finishedDate != ''){
+        if (finishedDate != '') {
             return 'checked';
-        }else {
+        } else {
             return '';
         }
     }
 
     todayConverter(finishedDate) {
-        if(getTodayString() == finishedDate) {
+        if (getTodayString() == finishedDate) {
             return ' [heute]';
         }
         return '';
@@ -110,21 +113,21 @@ class MainView extends AbstractView{
 
     priorityConverter(prio) {
         let result = '';
-        for(let i = 0 ; i < prio ; i++) {
+        for (let i = 0; i < prio; i++) {
             result += '🗲';
         }
         return result;
     }
 }
 
-class EditView extends AbstractView{
+class EditView extends AbstractView {
 
-    init (template, context) {
+    init(template, context) {
         super.initContent(template, context)
 
         this.setPriority(context.priority);
-        document.querySelectorAll(".priority").forEach((btn, index) =>{
-            btn.addEventListener("click", (event) =>{
+        document.querySelectorAll(".priority").forEach((btn, index) => {
+            btn.addEventListener("click", (event) => {
                 this.setPriority(index + 1);
             });
         });
@@ -158,7 +161,9 @@ class EditView extends AbstractView{
     getPriority() {
         let prioritySigns = document.querySelectorAll('.priority');
         let priority = 0;
-        prioritySigns.forEach(el => { if(el.classList.contains('checked')) priority++ });
+        prioritySigns.forEach(el => {
+            if (el.classList.contains('checked')) priority++
+        });
         return priority;
     }
 
@@ -168,9 +173,9 @@ class EditView extends AbstractView{
 
     setPriority(clickIndex) {
         document.querySelectorAll(".priority").forEach((b, i) => {
-            if ( i < clickIndex) {
+            if (i < clickIndex) {
                 b.classList.add('checked');
-            }else {
+            } else {
                 b.classList.remove('checked')
             }
         })

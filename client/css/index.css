@@ -1,5 +1,5 @@
 button, select, span, body, footer,
-section, article, div, h3, h2{
+section, article, div, h3, h2 {
     margin: 0;
     padding: 0;
 }

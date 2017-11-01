@@ -1,4 +1,3 @@
-
 var noteRepo = (function () {
 
     class Notelist {
@@ -33,7 +32,7 @@ var noteRepo = (function () {
 
         loadNoteById(id) {
             if (!id) return {};
-            let a= this.notes.filter(note => note._id == id);
+            let a = this.notes.filter(note => note._id == id);
             return a.length > 0 ? a[0] : {};
         }
 
@@ -43,26 +42,26 @@ var noteRepo = (function () {
          * @returns {{notes: [null,null,null]}}
          */
         loadNotes() {
-            connect.getAll( notes => {
-                this.notes = (!notes || notes == 'undefined') ? [] :  JSON.parse(notes);
+            connect.getAll(notes => {
+                this.notes = (!notes || notes == 'undefined') ? [] : JSON.parse(notes);
                 this.callRefresh(this.notes, null);
             })
             return this.notes;
         }
 
         callRefresh(list, note) {
-            if(this.refresher) {
+            if (this.refresher) {
                 this.refresher(list, note);
             }
         }
 
         serverPush(noteId) {
-            connect.getAll( notes => {
-                this.notes = (!notes || notes == 'undefined') ? [] :  JSON.parse(notes);
+            connect.getAll(notes => {
+                this.notes = (!notes || notes == 'undefined') ? [] : JSON.parse(notes);
                 let note = null;
-                if(noteId) {
+                if (noteId) {
                     let n = this.loadNoteById(noteId);
-                    if(n._id) note = n;
+                    if (n._id) note = n;
                 }
                 this.callRefresh(this.notes, note);
             })
@@ -91,10 +90,11 @@ var noteRepo = (function () {
         nodeList.refresher = refresher;
     }
 
-    return {    getNotes: getAllNotes,
-                addNewNote: addNote,
-                updateNote: updateNote,
-                loadNoteById: loadNote,
-                setRefresher: setRefresh
+    return {
+        getNotes: getAllNotes,
+        addNewNote: addNote,
+        updateNote: updateNote,
+        loadNoteById: loadNote,
+        setRefresher: setRefresh
     };
 })();

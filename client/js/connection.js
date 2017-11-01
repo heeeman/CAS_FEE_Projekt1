@@ -12,7 +12,9 @@ var connect = (function () {
         }).then(function (res) {
             // return res.json(); // so liessen sich direkt JS Objekte erzeugen
             return res.text();
-        }).then(json => {callBack(json);});
+        }).then(json => {
+            callBack(json);
+        });
     }
 
     function putNote(content) {
@@ -52,7 +54,9 @@ var connect = (function () {
         }).then(function (res) {
             // return res.json(); // so liessen sich direkt JS Objekte erzeugen
             return res.text();
-        }).then(json => {callback(json);});
+        }).then(json => {
+            callback(json);
+        });
 
         /**Variante xhr**/
         //
@@ -74,20 +78,24 @@ var connect = (function () {
     /*******Socket Server Push*******************/
     var socket = io();
 
-    socket.on('NoteList', function(msg){
+    socket.on('NoteList', function (msg) {
         console.log('Socket refres Note: ', msg);
-        if(pusher) { pusher(msg);}
+        if (pusher) {
+            pusher(msg);
+        }
     });
 
     function setPusher(methode) {
         pusher = methode;
     }
+
     /*******Socket*******************/
 
-    return {getAll: loadAll,
-            createNote: postNote,
-            updateNote: putNote,
-            setServerListener: setPusher
+    return {
+        getAll: loadAll,
+        createNote: postNote,
+        updateNote: putNote,
+        setServerListener: setPusher
     };
 
 })();
