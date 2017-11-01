@@ -1,5 +1,10 @@
-* {
-    margin: 0.3em;
+/** {*/
+    /*margin: 0.3em;*/
+/*}*/
+
+button, select, span {
+    margin: 0;
+    padding: 0;
 }
 
 .row-container {
@@ -14,14 +19,18 @@
     flex-flow: column wrap;
 }
 
-header {
+.separate {
+    margin: 0.3em;
+}
+
+.header {
     margin-right: 0.6em;
     padding-right: 0.9em;
 }
 
-button, select, span{
-    padding: 0.2em;
-}
+/*button, select, span{*/
+    /*padding: 0.2em;*/
+/*}*/
 
 .flex-size1 {
     flex: 1 0 0%;

@@ -15,23 +15,23 @@
     <!-- order id, for, name, type, class, value, handler-->
 
     <script id="main-template" type="text/x-handlebars-template">
-        <header>
+        <header class="header">
             <div class="row-container between">
-                <Button id="createButton" class="flex-size1">Create new Note</Button>
-                <span class="flex-size1"></span>
-                <span class="flex-size1"></span>
-                <span class="flex-size1"></span>
-                <select class="flex-size1 style-sheet">
+                <Button id="createButton" class="flex-size1 separate">Create new Note</Button>
+                <span class="flex-size1 separate"></span>
+                <span class="flex-size1 separate"></span>
+                <span class="flex-size1 separate"></span>
+                <select class="flex-size1 style-sheet separate">
                     <option value="base">Default-Style</option>
                     <option value="baseFrame">Frame-Style</option>
                 </select>
             </div>
             <div class="row-container between">
-                <button class="flex-size1 js-sort" data-sort-type="finishdate">By finish Date</button>
-                <button class="flex-size1 js-sort" data-sort-type="issuedate">By created Date</button>
-                <button class="flex-size1 js-sort" data-sort-type="priority">By Importance</button>
-                <span class="flex-size1"></span>
-                <button class="flex-size1 js-filter" data-filter-type="finished">Show finished</button>
+                <button class="flex-size1 js-sort separate" data-sort-type="finishdate">By finish Date</button>
+                <button class="flex-size1 js-sort separate" data-sort-type="issuedate">By created Date</button>
+                <button class="flex-size1 js-sort separate" data-sort-type="priority">By Importance</button>
+                <span class="flex-size1 separate"></span>
+                <button class="flex-size1 js-filter separate" data-filter-type="finished">Show finished</button>
             </div>
         </header>
         {{#each this}} <!-- speziale damit ich direkt ein array übergeben kann und dieses nicht in ein Obj packen muss-->
